@@ -25,17 +25,12 @@ class UsersController extends AppController {
 		$this->set(compact(array('pageTitle', 'groups')));
 	}
 	
-	public function admin_view() {
+	/* public function admin_view() {
 		if (empty($this->params['user'])) {
 			$this->Session->setFlash(__('Invalid User Id'), 'flash_failure');
 			$this->redirect('index');
 		}
 		
-		App::import('model', 'Country');
-		
-		$this->Country = new Country();
-		$this->Country->contain();
-		$countries = $this->Country->find('list');
 		$users = $this->User->find('list');
 		$options = array(
 			'conditions' => array(
@@ -62,19 +57,18 @@ class UsersController extends AppController {
 		$pageTitle = sprintf(__('%ss &#187; %s'), $user['Group']['name'], $user['User']['fullnameNoTitle']);
 		
 		$this->set(compact(array('countries', 'users', 'user', 'groups', 'pageTitle')));
-	}
+	} */
 
 	public function admin_add() {
 		if (!empty($this->request->data)) {
 			$this->request->data['User']['active'] = true;
 			$this->request->data['User']['deleted'] = false;
 			
-			$this->request->data['User']['ref'] = $this->User->getRef($this->request->data['User']['group_id']);
 			
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('The user has been saved'), 'flash_success');
-				$this->redirect(array('action' => 'view', 'user' => $this->User->id));
+				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'), 'flash_failure');
 			}
@@ -85,6 +79,7 @@ class UsersController extends AppController {
 		$this->set('userGenders', $this->userGenders);
 		$this->set('userMaritalStatuses', $this->userMaritalStatuses);
 		$this->set('userTitles', $this->userTitles);
+		$this->set('patientTypes', $this->patientTypes);
 		$this->set(compact(array('groups', 'pageTitle')));
 	}
 

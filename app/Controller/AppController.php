@@ -60,10 +60,8 @@ class AppController extends Controller {
 	);
 	
 	public $patientTypes = array(
-		'All' => 'All',
+		'Adult' => 'Adult',
 		'Child' => 'Child',
-		'Male' => 'Male',
-		'Female' => 'Female',
 	);
 	
 	public $allowedUploadExtensions = array(
