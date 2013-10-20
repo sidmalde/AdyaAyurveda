@@ -2,6 +2,7 @@
 
 	Router::connect('/', array('controller' => 'pages', 'action' => 'home'));
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
+	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
 	
 	// Groups
 	Router::connect('/system-management/groups', array('controller' => 'groups', 'action' => 'index', 'admin' => true));
