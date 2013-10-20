@@ -330,15 +330,15 @@ class UsersController extends AppController {
 		$this->layout = 'default';
 		if ($this->Auth->user()) {
 			if ($this->Auth->user('group_id') == '52346d30-68f8-4e91-b19b-1368d96041f1') {
-				$this->redirect('/admin');
+				$this->redirect('/system-management/users');
 			} else {
 				$this->redirect('/myportal');
 			}
 		} else {
 			if ($this->request->is('post')) {
 				if ($this->Auth->login()) {
-					if ($this->Auth->user('group_id') == '51488314-33c4-4394-8d02-0f0c46dad844') {
-						$this->redirect('/admin');
+					if ($this->Auth->user('group_id') == '52346d30-68f8-4e91-b19b-1368d96041f1') {
+						$this->redirect('/system-management/users');
 					} else {
 						$this->redirect('/myportal');
 					}
