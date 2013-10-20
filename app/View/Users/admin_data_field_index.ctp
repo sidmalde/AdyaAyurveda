@@ -5,7 +5,7 @@
 	</div>
 </h3>
 
-<div class="well">
+<div class="col-xs-12">
 	<? if (!empty($userDataFields)): ?>
 		<table class="table table-condensed table-striped table-bordered table-hover">
 			<tr>

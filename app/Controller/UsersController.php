@@ -25,7 +25,7 @@ class UsersController extends AppController {
 		$this->set(compact(array('pageTitle', 'groups')));
 	}
 	
-	/* public function admin_view() {
+	public function admin_view() {
 		if (empty($this->params['user'])) {
 			$this->Session->setFlash(__('Invalid User Id'), 'flash_failure');
 			$this->redirect('index');
@@ -40,12 +40,6 @@ class UsersController extends AppController {
 		$this->User->contain(array(
 			'Group',
 			'UserNote',
-			'UserAttachment' => array(
-				'conditions' => array(
-					'UserAttachment.deleted' => 0,
-				),
-			),
-			'Job',
 		));
 		$this->request->data = $user = $this->User->find('first', $options);
 		
@@ -56,8 +50,36 @@ class UsersController extends AppController {
 		$groups = $this->User->Group->find('list');
 		$pageTitle = sprintf(__('%ss &#187; %s'), $user['Group']['name'], $user['User']['fullnameNoTitle']);
 		
-		$this->set(compact(array('countries', 'users', 'user', 'groups', 'pageTitle')));
-	} */
+		$this->loadModel('Country');
+		$countries = $this->Country->getIsoNameList();
+		$this->User->UserDataValue->UserDataField->contain();
+		$options = array(
+			'conditions' => array(
+				'UserDataField.gender' => array(
+					'Both',
+					$user['User']['gender'],
+				),
+			),
+			'order' => array(
+				'UserDataField.gender' => 'DESC',
+			),
+		);
+		$userDataFields = $this->User->UserDataValue->UserDataField->find('all', $options);
+		
+		foreach($userDataFields as $index => $userDataField) {
+			if ($userDataField['UserDataField']['type'] == 'list') {
+				$temparray = array();
+				$explodedValues = explode(',', $userDataField['UserDataField']['values']);
+				foreach ($explodedValues as $explodedValue) {
+					$temparray[trim($explodedValue)] = trim($explodedValue);
+				}
+				$userDataFields[$index]['UserDataField']['options'] = $temparray;
+			}
+		}
+		// debug($userDataFields);
+		// die;
+		$this->set(compact(array('countries', 'users', 'user', 'groups', 'pageTitle', 'userDataFields')));
+	}
 
 	public function admin_add() {
 		if (!empty($this->request->data)) {
@@ -147,6 +169,12 @@ class UsersController extends AppController {
 				}
 				
 				if ($save) {
+					// echo ($this->request->data['User']['current_password']);
+					// echo ($this->request->data['User']['new_password']);
+					// echo ($this->request->data['User']['confirm_password']);
+					// echo (AuthComponent::password($this->request->data['User']['current_password']));
+					// echo ($user['User']['password']);
+					// die;
 					if ($this->User->save($user)) {
 						$message = __('Your details have been updated.');
 						$type = 'flash_success';
@@ -164,12 +192,19 @@ class UsersController extends AppController {
 				
 				$this->redirect($this->referer());
 			} else {
-				if (!empty($this->request->data['User']['date_of_birth'])) {
-					$this->request->data['User']['date_of_birth'] = $this->formatDate($this->request->data['User']['date_of_birth']);
+				if (!empty($this->request->data['UserNote']['summary'])) {
+					if (!empty($this->request->data['UserNote']['id'])) {
+						$userNote['id'] = $this->request->data['UserNote']['id'];
+					} else {
+						$usernote = $this->User->UserNote->create();
+					}
+					$userNote['creator_id'] = $this->Auth->user('id');
+					$userNote['user_id'] = $this->request->data['User']['id'];
+					$userNote['summary'] = $this->request->data['UserNote']['summary'];
+					$userNote['description'] = $this->request->data['UserNote']['description'];
+					$this->User->UserNote->save($userNote);
 				}
-				if (!empty($this->request->data['User']['pco_expiry'])) {
-					$this->request->data['User']['pco_expiry'] = $this->formatDate($this->request->data['User']['pco_expiry']);
-				}
+				
 				if ($this->User->save($this->request->data)) {
 					$this->Session->setFlash(__('The user has been saved'), 'flash_success');
 				} else {
@@ -294,32 +329,18 @@ class UsersController extends AppController {
 	public function login() {
 		$this->layout = 'default';
 		if ($this->Auth->user()) {
-			if ($this->Auth->user('group_id') == '51488314-33c4-4394-8d02-0f0c46dad844' || $this->Auth->user('group_id') == '5148e26b-f010-496e-b1c1-0f0c46dad844') {
+			if ($this->Auth->user('group_id') == '52346d30-68f8-4e91-b19b-1368d96041f1') {
 				$this->redirect('/admin');
 			} else {
-				$this->redirect('/mylvg');
+				$this->redirect('/myportal');
 			}
 		} else {
 			if ($this->request->is('post')) {
 				if ($this->Auth->login()) {
-					$messageParams = array(
-						$this->Auth->user('fullnameNoTitle'),
-						date("d-M-Y H:i"),
-						$_SERVER['REMOTE_ADDR'],
-					);
-					$urlParams = array(
-						$this->Auth->user('id')
-					);
-					$extraParams = array(
-						'Log' => array(
-							'admin' => true,
-						),
-					);
-					$this->User->addLog('516c5d04-efc4-43a8-bec7-0eb846dad844', $messageParams, $urlParams, $extraParams);
-					if ($this->Auth->user('group_id') == '51488314-33c4-4394-8d02-0f0c46dad844' || $this->Auth->user('group_id') == '5148e26b-f010-496e-b1c1-0f0c46dad844') {
+					if ($this->Auth->user('group_id') == '51488314-33c4-4394-8d02-0f0c46dad844') {
 						$this->redirect('/admin');
 					} else {
-						$this->redirect('/mylvg');
+						$this->redirect('/myportal');
 					}
 				} else {
 					$this->Session->setFlash(__('Your email or password was incorrect.'), 'flash_failure');

@@ -31,23 +31,16 @@ App::uses('AppController', 'Controller');
  */
 class PagesController extends AppController {
 
-/**
- * This controller does not use a model
- *
- * @var array
- */
-	public $uses = array();
-
-/**
- * Displays a view
- *
- * @param mixed What page to display
- * @return void
- * @throws NotFoundException When the view file could not be found
- *	or MissingViewException in debug mode.
- */
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->set('bodyClass', 'pages');
+		$this->Auth->allow();
+		$this->layout = 'admin';
+	}
+	
 	public function display() {
 		$path = func_get_args();
+		$this->layout = 'default';
 
 		$count = count($path);
 		if (!$count) {
@@ -74,5 +67,27 @@ class PagesController extends AppController {
 			}
 			throw new NotFoundException();
 		}
+	}
+	
+	function home() {
+		$this->layout = 'default';
+		$pageTitle = __('Welcome to Adya-Ayurveda');
+		$this->set(compact(array('pageTitle')));
+	}
+	
+	function admin_index() {
+		
+	}
+	
+	function admin_add() {
+		
+	}
+	
+	function admin_edit() {
+		
+	}
+	
+	function admin_delete() {
+		
 	}
 }

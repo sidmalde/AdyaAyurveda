@@ -7,7 +7,8 @@ class User extends AppModel {
 	var $displayField = 'fullnameNoTitle';
 	var $actsAs = array('Containable', 'Acl' => array('type' => 'requester', 'enabled' => false));
 	var $hasMany = array(
-		'UserDataValue'
+		'UserDataValue',
+		'UserNote',
 	);
 	var $belongsTo = array(
 		'Group' => array(

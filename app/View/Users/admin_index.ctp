@@ -74,15 +74,14 @@
 												<td><?=$user['deleted']; ?>&nbsp;</td>
 												<td class="actions">
 													<div class="btn-group">
-														<?=$this->Html->link(__('View'), array('controller' => 'users', 'action' => 'view', 'user' => $user['id']), array('class' => 'btn btn-info'));?>
-														<?=$this->Html->link(__('Edit').'<span class="caret"></span>', array('controller' => 'users', 'action' => 'edit', 'user' => $user['id']), array('escape' => false, 'class' => 'btn btn-success dropdown-toggle', 'data-toggle' => 'dropdown'));?>
+														<button class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown"><?=__('Actions')?> <span class="caret"></span></button>
 														<ul class="dropdown-menu">
-															<!-- dropdown menu links -->
 															<? if (empty($user['active'])): ?>
-																<li><?=$this->Html->link(__('Activate'), array('controller' => 'users', 'action' => 'activate', 'user' => $user['id']));?></li>
+																<li><?=$this->Html->link(__('Activate'), array('controller' => 'users', 'action' => 'activate', 'user' => $user['id']), array('escape' => false));?></li>
 															<? endif; ?>
-															<li><?=$this->Html->link(__('Delete'), array('controller' => 'users', 'action' => 'delete', 'user' => $user['id']));?></li>
-															<li><?=$this->Html->link(__('More...'), array('controller' => 'users', 'action' => 'edit', 'user' => $user['id']));?></li>
+															<li><?=$this->Html->link('<i class="icon-cog"></i> '.__('Edit'), array('controller' => 'users', 'action' => 'edit', 'user' => $user['id']), array('escape' => false));?></li>
+															<li><?=$this->Html->link('<i class="icon-remove"></i> '.__('Delete'), array('controller' => 'users', 'action' => 'delete', 'user' => $user['id']), array('escape' => false));?></li>
+															<li><?=$this->Html->link('<i class="icon-eye-open"></i> '.__('View'), array('controller' => 'users', 'action' => 'view', 'user' => $user['id']), array('escape' => false));?></li>
 														</ul>
 													</div>
 												</td>

@@ -57,6 +57,7 @@ class AppController extends Controller {
 		'list' => 'List',
 		'boolean' => 'True or False',
 		'text' => 'Text',
+		'textarea' => 'Long Text',
 	);
 	
 	public $patientTypes = array(
@@ -86,5 +87,8 @@ class AppController extends Controller {
 			$this->set('currentUser', $this->currentUser);
 		}
 		
+		$userTitles = $this->userTitles;
+		
+		$this->set(compact(array('userTitles')));
 	}
 }
