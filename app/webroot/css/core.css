@@ -1,4 +1,4 @@
-body {
+body.admin-layout {
   padding-top: 60px;
 }
 
@@ -10,8 +10,106 @@ h1, h2, h3, h4, h5, h6 {
 .clear{
 	clear: both;
 }
+
+.navbar-brand {
+	font-size: 20px;
+}
+
 /* @media (max-width: 979px) {
   body {
     padding-top: 0px;
   }
 } */
+
+
+#bottom-shade {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	padding: 0 20px;
+	box-shadow: 1px 1px 5px 0 rgba(11,30,44,0.9);
+	overflow: hidden;
+	background-color: #234;
+	background-color: rgba(11, 30, 44, 0.9);
+	z-index: 1051;
+}
+#bottom-shade .alert {
+	left: 50%;
+	position: relative;
+	margin-left: -500px;
+	width: 950px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+
+
+/* datatables */
+
+div.dataTables_length label {
+	float: left;
+	text-align: left;
+}
+div.dataTables_length select {
+	width: 75px;
+}
+div.dataTables_filter label {
+	float: right;
+}
+div.dataTables_info {
+	padding-top: 8px;
+}
+div.dataTables_paginate {
+	float: right;
+	margin: 0;
+}
+table.table {
+	clear: both;
+	margin-bottom: 6px !important;
+	max-width: none !important;
+}
+table .header:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+.bootstrap-timepicker-widget{
+	z-index: 1051;
+}
+.child-control {
+	display: inline-block;
+	margin-bottom: 0;
+	vertical-align: middle;
+}
+.control-group.multiple .child-control.error input, .control-group.multiple .child-control.error select, .control-group.multiple .child-control.error textarea{
+	border-color: #b94a48;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.control-group.multiple .child-control.success input, .control-group.multiple .child-control.success select, .control-group.multiple .child-control.error textarea{
+	border-color: #468847;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.control-group.multiple .child-control.success .input-prepend .add-on, .control-group.multiple .child-control.success .input-append .add-on {
+	color: #468847;
+	background-color: #dff0d8;
+	border-color: #468847;
+}
+.control-group.multiple .child-control.error .input-prepend .add-on, .control-group.multiple .child-control.error .input-append .add-on {
+	color: #b94a48;
+	background-color: #f2dede;
+	border-color: #b94a48;
+}
+.input-block-level+.popover.right {
+	margin-left: -50px;
+}
+.form-horizontal.form-condensed .control-group{
+	margin-bottom: 10px
+}
+.input-append, .input-prepend{
+	margin-bottom: 0;
+}

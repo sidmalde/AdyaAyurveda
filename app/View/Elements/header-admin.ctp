@@ -37,6 +37,8 @@
 					<ul class="dropdown-menu" aria-labelledby="User Management">
 						<li><?=$this->Html->link(__('Pages'), array('controller' => 'pages', 'action' => 'index'));?></li>
 						<li><?=$this->Html->link(__('Knowledge Base'), array('controller' => 'knowledge_base_articles', 'action' => 'index'));?></li>
+						<li><?=$this->Html->link(__('Modalities'), array('controller' => 'modalities', 'action' => 'index'));?></li>
+						<li><?=$this->Html->link(__('Diseases'), array('controller' => 'diseases', 'action' => 'index'));?></li>
 					</ul>
 				</li>
 			</ul>

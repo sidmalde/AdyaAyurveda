@@ -13,7 +13,6 @@
 	
 	<?=$this->Html->css('font-awesome/css/font-awesome.min'); ?>
 	<?=$this->Html->css('bootstrap.min'); ?>
-	<?/* =$this->Html->css('slate_bootstrap.min');  */?>
 	<?=$this->Html->css('cerulean_bootstrap.min'); ?>
 	<?=$this->Html->css('core'); ?>
 	
@@ -21,10 +20,11 @@
 	<?=$this->Html->script('core'); ?>
 </head>
 <body>
-	<?=$this->element('header-default');?>
 	<div class="container">
 		<div id="content" class="row">
 			<div class="col-xs-12">
+				<?=$this->element('header-default');?>
+				<?=$this->element('nav-default');?>
 				<?=$this->Session->flash(); ?>
 
 				<?=$this->fetch('content'); ?>

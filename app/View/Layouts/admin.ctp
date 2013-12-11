@@ -13,6 +13,7 @@
 	
 	<?=$this->Html->script('jquery-1.10.2.min'); ?>
 	
+	<?=$this->Html->css('bootstrap-combined.no-icons.min.css'); ?> 
 	<?=$this->Html->css('font-awesome/css/font-awesome.min'); ?>
 	<?=$this->Html->css('bootstrap.min'); ?>
 	<?/* =$this->Html->css('slate_bootstrap.min');  */?>
@@ -22,13 +23,11 @@
 	<?=$this->Html->script('bootstrap.min'); ?>
 	<?=$this->Html->script('core'); ?>
 </head>
-<body>
+<body class="admin-layout">
 	<?=$this->element('header-admin');?>
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12">
-				<?=$this->Session->flash(); ?>
-
 				<?=$this->fetch('content'); ?>
 			</div>
 		</div>
@@ -39,5 +38,6 @@
 		<div class="clear">
 		</div>
 	</div>
+	<?=$this->element('flash_container');?>
 </body>
 </html>

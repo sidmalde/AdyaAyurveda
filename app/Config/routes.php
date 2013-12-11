@@ -25,12 +25,26 @@
 	Router::connect('/content-management/pages/:page/edit', array('controller' => 'pages', 'action' => 'edit', 'admin' => true));
 	Router::connect('/content-management/pages/:page/delete', array('controller' => 'pages', 'action' => 'delete', 'admin' => true));
 	
-	// Users
+	// KB
 	Router::connect('/content-management/knowlege-base', array('controller' => 'knowledge_base_articles', 'action' => 'index', 'admin' => true));
 	Router::connect('/content-management/knowlege-base/new', array('controller' => 'knowledge_base_articles', 'action' => 'add', 'admin' => true));
 	Router::connect('/content-management/knowlege-base/:kbArticle', array('controller' => 'knowledge_base_articles', 'action' => 'view', 'admin' => true));
 	Router::connect('/content-management/knowlege-base/:kbArticle/edit', array('controller' => 'knowledge_base_articles', 'action' => 'edit', 'admin' => true));
 	Router::connect('/content-management/knowlege-base/:kbArticle/delete', array('controller' => 'knowledge_base_articles', 'action' => 'delete', 'admin' => true));
+	
+	// Modalities
+	Router::connect('/content-management/modalities', array('controller' => 'modalities', 'action' => 'index', 'admin' => true));
+	Router::connect('/content-management/modalities/new', array('controller' => 'modalities', 'action' => 'add', 'admin' => true));
+	Router::connect('/content-management/modalities/:modality', array('controller' => 'modalities', 'action' => 'view', 'admin' => true));
+	Router::connect('/content-management/modalities/:modality/edit', array('controller' => 'modalities', 'action' => 'edit', 'admin' => true));
+	Router::connect('/content-management/modalities/:modality/delete', array('controller' => 'modalities', 'action' => 'delete', 'admin' => true));
+	
+	// Diseases
+	Router::connect('/content-management/diseases', array('controller' => 'diseases', 'action' => 'index', 'admin' => true));
+	Router::connect('/content-management/diseases/new', array('controller' => 'diseases', 'action' => 'add', 'admin' => true));
+	Router::connect('/content-management/diseases/:disease', array('controller' => 'diseases', 'action' => 'view', 'admin' => true));
+	Router::connect('/content-management/diseases/:disease/edit', array('controller' => 'diseases', 'action' => 'edit', 'admin' => true));
+	Router::connect('/content-management/diseases/:disease/delete', array('controller' => 'diseases', 'action' => 'delete', 'admin' => true));
 	
 	// User Data Fields
 	Router::connect('/system-management/user-data-fields', array('controller' => 'users', 'action' => 'data_field_index', 'admin' => true));

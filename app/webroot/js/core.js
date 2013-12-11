@@ -20,4 +20,33 @@ $(document).ready(function(){
 		$(".form-user-note-edit #UserNoteDescription").val('');
 		return false;
 	});
+	
+	if($('#bottom-shade .alert:not(#cookies-alert)').length > 0){
+		animBottomMargin();
+		$('#bottom-shade .alert:not(#cookies-alert)').addClass('timed-from-start');
+		setTimeout(function() {
+			$('#bottom-shade .alert.timed-from-start').remove();
+			animBottomMargin();
+		}, 7500);
+	}
+	$('#bottom-shade').on('click', '.alert .close', function(e){
+		var closingElem = $(e.currentTarget).closest('.alert');
+		// the folllowing line is different than animBottomMargin();
+		$('#container').animate({paddingBottom: $('#bottom-shade').outerHeight()-closingElem.outerHeight() + parseInt($('#bottom-shade').css('marginBottom').replace('px', '')) +'px'}, 500);
+	});
+	
+	// DataTables
+	if($('.datatable').length > 0){
+		try{
+			$.getScript('/js/jquery.dataTables.min.js').done(function(){
+				$.getScript('/js/DT_bootstrap.js');
+			});
+		} catch(e){
+			console.log('datatables js failed');
+		}
+	}
 });
+
+function animBottomMargin(){
+	$('#container').animate({paddingBottom: $('#bottom-shade').outerHeight() + parseInt($('#bottom-shade').css('marginBottom').replace('px', '')) +'px'}, 500);
+}

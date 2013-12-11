@@ -5,8 +5,8 @@
 				<div class="col-xs-8"><h3><?=@$pageTitle;?></h3></div>
 				<div class="col-xs-3">
 					<div class="btn-group pull-right">
-						<?=$this->Html->link(__('Back'), array('action' => 'index'), array('class' => 'btn btn-success'));?>
-						<?=$this->Form->submit(__('Save Changes'), array('div' => false, 'label' => false, 'type' => 'submit', 'class' => 'btn btn-primary'));?>
+						<?=$this->Html->link(__('Back'), array('action' => 'index'), array('class' => 'btn btn-danger'));?>
+						<?=$this->Form->submit(__('Save Changes'), array('div' => false, 'label' => false, 'type' => 'submit', 'class' => 'btn btn-success'));?>
 					</div>
 				</div>
 			</div>
@@ -20,6 +20,7 @@
 					<li class="active"><a href="#basicInformation" data-toggle="tab"><?=__('Info');?> <i class="icon icon-edit"></i></a></li>
 					<li><a href="#extraInformation" data-toggle="tab"><?=__('Extra Info.');?> <i class="icon icon-edit"></i></a></li>
 					<li><a href="#userNotes" data-toggle="tab"><?=__('Notes');?> <i class="icon icon-edit"></i></a></li>
+					<li><a href="#uploads" data-toggle="tab"><?=__('Uploads');?> <i class="icon icon-edit"></i></a></li>
 				</ul>
 		 
 				<div id="user-view-content" class="tab-content">
@@ -55,7 +56,6 @@
 							</div>
 						</div>
 					</div>
-					
 					<div class="tab-pane fade" id="extraInformation">
 						<div class="well">
 							<div class="col-xs-5">
@@ -73,8 +73,7 @@
 							</div>
 						<div class="clear">&nbsp;</div>
 						</div>
-					</div>
-							
+					</div>	
 					<div class="tab-pane fade" id="userNotes">
 						<div class="well">
 							<h3><?=__('Notes');?></h3>
@@ -101,15 +100,16 @@
 														</a>
 													</div>
 													<div id="collapse<?=$index;?>" class="panel-collapse collapse">
-													<div class="panel-body">
-														<p class="alert alert-info">
-															<strong><?=__('Created By: ', true);?></strong><?=@$users[$userNote['creator_id']];?><br />
-															<strong><?=__('Created On: ', true);?></strong><?=$this->Time->nice($userNote['created']);?><strong><?=__(' @: ', true);?></strong><?=$this->Time->niceTime($userNote['created']);?><br />
-														</p>
-														<p class="alert alert-success"><?=nl2br(Sanitize::html($userNote['description']));?></p>
-														<div class="btn-group">
-															<?=$this->Html->link(__('Edit', true), '#', array('class' => 'btn btn-success btn-user-note-edit', 'data-id' => $userNote['id'], 'data-summary' => $userNote['summary'], 'data-description' => Sanitize::html($userNote['description'])))?>
-															<?=$this->Html->link(__('Delete', true), array('controller' => 'users', 'action' => 'delete_user_note', 'userNote' => $userNote['id']), array('class' => 'btn btn-danger'))?> 
+														<div class="panel-body">
+															<p class="alert alert-info">
+																<strong><?=__('Created By: ', true);?></strong><?=@$users[$userNote['creator_id']];?><br />
+																<strong><?=__('Created On: ', true);?></strong><?=$this->Time->nice($userNote['created']);?><strong><?=__(' @: ', true);?></strong><?=$this->Time->niceTime($userNote['created']);?><br />
+															</p>
+															<p class="alert alert-success"><?=nl2br(Sanitize::html($userNote['description']));?></p>
+															<div class="btn-group">
+																<?=$this->Html->link(__('Edit', true), '#', array('class' => 'btn btn-success btn-user-note-edit', 'data-id' => $userNote['id'], 'data-summary' => $userNote['summary'], 'data-description' => Sanitize::html($userNote['description'])))?>
+																<?=$this->Html->link(__('Delete', true), array('controller' => 'users', 'action' => 'delete_user_note', 'userNote' => $userNote['id']), array('class' => 'btn btn-danger'))?> 
+															</div>
 														</div>
 													</div>
 												</div>
@@ -122,6 +122,9 @@
 								</div>
 							</div>
 						</div>
+					</div>
+					<div class="tab-pane fade" id="uploads">
+						<p>Uploads</p>
 					</div>
 				</div>
 			</div>
