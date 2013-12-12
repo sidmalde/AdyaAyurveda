@@ -103,4 +103,20 @@ class User extends AppModel {
 		}
 		return true;
     }
+	
+	public function getPatientList() {
+		$this->contain();
+		$options = array(
+			'conditions' => array(
+				'User.group_id' => '5234723b-bdbc-4e50-930c-1368d96041f1',
+			),
+		);
+		$patients = $this->find('all', $options);
+		
+		$formattedPatients = array();
+		foreach ($patients as $patient) {
+			$formattedPatients[$patient['User']['id']] = $patient['User']['title'].' '.$patient['User']['firstname'].' '.$patient['User']['lastname'];
+		}
+		return $formattedPatients;
+	}
 }

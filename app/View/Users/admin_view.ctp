@@ -1,9 +1,9 @@
 <?=$this->Form->create('User', array('url' => $this->Html->url(array('controller' => 'users', 'action' => 'edit', 'user' => $user['User']['id'])), 'class' => 'form form-user-note-edit', 'type' => 'file')); ?>
 	<div class="row">
-		<div class="col-xs-12 page-header">
+		<div class="col-md-12 page-header">
 			<div class="row">
-				<div class="col-xs-8"><h3><?=@$pageTitle;?></h3></div>
-				<div class="col-xs-3">
+				<div class="col-md-8"><h3><?=@$pageTitle;?></h3></div>
+				<div class="col-md-3">
 					<div class="btn-group pull-right">
 						<?=$this->Html->link(__('Back'), array('action' => 'index'), array('class' => 'btn btn-danger'));?>
 						<?=$this->Form->submit(__('Save Changes'), array('div' => false, 'label' => false, 'type' => 'submit', 'class' => 'btn btn-success'));?>
@@ -14,7 +14,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-xs-12">
+		<div class="col-md-12">
 			<div class="tabbable">
 				<ul class="nav nav-tabs" id="user-view-tabbing">
 					<li class="active"><a href="#basicInformation" data-toggle="tab"><?=__('Info');?> <i class="icon icon-edit"></i></a></li>
@@ -27,7 +27,7 @@
 					<div class="tab-pane active in" id="basicInformation">
 						<div class="well">
 							<div class="row">
-								<div class="col-xs-6">
+								<div class="col-md-6">
 									<?=$this->Form->hidden('id');?>
 									<?=$this->Form->input('group_id');?>
 									<?/* =$this->Form->input('status_id'); */?>
@@ -43,7 +43,7 @@
 									</div>
 									<?=$this->Form->input('phone');?>
 								</div>
-								<div class="col-xs-5">
+								<div class="col-md-5">
 									<?=$this->Form->input('address_1');?>
 									<?=$this->Form->input('address_2');?>
 									<?=$this->Form->input('address_3');?>
@@ -58,7 +58,7 @@
 					</div>
 					<div class="tab-pane fade" id="extraInformation">
 						<div class="well">
-							<div class="col-xs-5">
+							<div class="col-md-5">
 								<? foreach($userDataFields as $userDataField): ?>
 									<? if($userDataField['UserDataField']['type'] == 'text'): ?>
 										<?=$this->Form->input('UserDataField.'.$userDataField['UserDataField']['id'], array('type' => 'text', 'label' => $userDataField['UserDataField']['description']));?>
@@ -78,7 +78,7 @@
 						<div class="well">
 							<h3><?=__('Notes');?></h3>
 							<div class="row">
-								<div class="col-xs-6">
+								<div class="col-md-6">
 									<div>
 										<?=$this->Form->input(__('UserNote.id'), array('value' => ''));?>
 										<?=$this->Form->input(__('UserNote.summary'));?>
@@ -86,7 +86,7 @@
 										<?=$this->Form->button(__('Save', true), array('class' => 'btn btn-info'))?>
 									</div>
 								</div>
-								<div class="col-xs-6">
+								<div class="col-md-6">
 									<? if (!empty($user['UserNote'])): ?>
 										<div class="accordion">
 											<div class="panel-group success" id="user-notes">

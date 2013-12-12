@@ -20,8 +20,7 @@ class KnowledgeBaseArticlesController extends AppController {
 			'KnowledgeBaseArticle' => 'Disease'
 		));
 		$kbArticles = $this->KnowledgeBaseArticle->Modality->find('all');
-		// debug($kbArticles);
-		// die;
+		
 		$title_for_layout = __('Knowledge Base Articles');
 		$this->set(compact(array('title_for_layout', 'kbArticles')));
 	}
@@ -33,7 +32,7 @@ class KnowledgeBaseArticlesController extends AppController {
 				$this->Session->setFlash(__('KB Article has been saved.'), 'flash_success');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('KB Article has been saved.'), 'flash_failure');
+				$this->Session->setFlash(__('KB Article could not be saved.'), 'flash_failure');
 			}
 		}
 		
@@ -63,11 +62,11 @@ class KnowledgeBaseArticlesController extends AppController {
 				$this->Session->setFlash(__('KB Article has been saved.'), 'flash_success');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('KB Article has been saved.'), 'flash_failure');
+				$this->Session->setFlash(__('KB Article could not be saved.'), 'flash_failure');
 			}
 		}
 		$kbArticle = $this->KnowledgeBaseArticle->findById($this->request->params['kbArticle']);
-		$title_for_layout = __('Knowledge Base Articles :: New Article');
+		$title_for_layout = __('Knowledge Base Articles :: Edit Article');
 		$this->set(compact(array('title_for_layout', 'kbArticle')));
 	}
 	

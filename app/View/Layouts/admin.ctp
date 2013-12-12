@@ -27,12 +27,12 @@
 	<?=$this->element('header-admin');?>
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-md-12">
 				<?=$this->fetch('content'); ?>
 			</div>
 		</div>
 		<div id="footer" class="row">
-			<div class="col-xs-12">
+			<div class="col-md-12">
 			</div>
 		</div>
 		<div class="clear">

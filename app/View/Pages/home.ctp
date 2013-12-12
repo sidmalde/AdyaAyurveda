@@ -2,7 +2,7 @@
 	<?=$pageTitle;?>
 </h1>
 
-<div class="col-xs-12">
+<div class="col-md-12">
 	<div class="panel panel-success">
 		<div class="panel-heading">
 			<h3 class="panel-title"><?=__('About Vaidya Sarita and Adya Ayurveda');?></h3>
@@ -51,7 +51,7 @@
 </div>
 
 <h3><?=__('Venues');?></h3>
-<div class="col-xs-6">
+<div class="col-md-6">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<h3 class="panel-title"><?=__('Stanmore Clinic');?></h3>
@@ -68,7 +68,7 @@
 		</div>
 	</div>
 </div>
-<div class="col-xs-6">
+<div class="col-md-6">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<h3 class="panel-title"><?=__('Southall Clinic');?></h3>

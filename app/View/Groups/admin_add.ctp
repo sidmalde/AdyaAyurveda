@@ -6,7 +6,7 @@
 </h3>
 <br />
 <div class="row">
-	<div class="col-xs-12">
+	<div class="col-md-12">
 		<div class="well">
 			<?=$this->Form->create('Group'); ?>
 				<?=$this->Form->input('name');?>

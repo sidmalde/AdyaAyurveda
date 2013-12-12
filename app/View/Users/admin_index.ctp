@@ -7,7 +7,7 @@
 </h3>
 
 <div class="row">
-	<div class="col-xs-12">
+	<div class="col-md-12">
 		<ul class="nav nav-tabs" id="myTab">
 			<?php foreach ($groups as $index => $group): ?>
 				<? $activeLinkClass=($index == 0) ? 'class="active"': '';?>

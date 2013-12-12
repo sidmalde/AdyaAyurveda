@@ -22,7 +22,7 @@
 <body>
 	<div class="container">
 		<div id="content" class="row">
-			<div class="col-xs-12">
+			<div class="col-md-12">
 				<?=$this->element('header-default');?>
 				<?=$this->element('nav-default');?>
 				<?=$this->Session->flash(); ?>
@@ -31,7 +31,7 @@
 			</div>
 		</div>
 		<div id="footer" class="row">
-			<div class="col-xs-12">
+			<div class="col-md-12">
 			</div>
 		</div>
 		<div class="clear">&nbsp;</div>

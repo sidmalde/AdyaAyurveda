@@ -40,7 +40,7 @@
 									<td><?=$kbArticle['title'];?></td>
 									<td><?=$this->Time->niceShort($kbArticle['created']);?></td>
 									<td><?=$this->Time->niceShort($kbArticle['modified']);?></td>
-									<td class="actions">
+									<td class="actions condensed">
 										<div class="btn-group">
 											<button class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown"><?=__('Actions')?> <span class="caret"></span></button>
 											<ul class="dropdown-menu">

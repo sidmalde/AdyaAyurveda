@@ -5,7 +5,7 @@
 	</div>
 </h3>
 
-<div class="col-xs-12">
+<div class="col-md-12">
 	<? if (!empty($userDataFields)): ?>
 		<table class="table table-condensed table-striped table-bordered table-hover">
 			<tr>

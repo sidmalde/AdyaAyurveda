@@ -46,6 +46,20 @@
 	Router::connect('/content-management/diseases/:disease/edit', array('controller' => 'diseases', 'action' => 'edit', 'admin' => true));
 	Router::connect('/content-management/diseases/:disease/delete', array('controller' => 'diseases', 'action' => 'delete', 'admin' => true));
 	
+	// Products
+	Router::connect('/system-management/products', array('controller' => 'products', 'action' => 'index', 'admin' => true));
+	Router::connect('/system-management/products/new', array('controller' => 'products', 'action' => 'add', 'admin' => true));
+	Router::connect('/system-management/products/:product', array('controller' => 'products', 'action' => 'view', 'admin' => true));
+	Router::connect('/system-management/products/:product/edit', array('controller' => 'products', 'action' => 'edit', 'admin' => true));
+	Router::connect('/system-management/products/:product/delete', array('controller' => 'products', 'action' => 'delete', 'admin' => true));
+	
+	// Orders
+	Router::connect('/system-management/orders', array('controller' => 'orders', 'action' => 'index', 'admin' => true));
+	Router::connect('/system-management/orders/new', array('controller' => 'orders', 'action' => 'add', 'admin' => true));
+	Router::connect('/system-management/orders/:order', array('controller' => 'orders', 'action' => 'view', 'admin' => true));
+	Router::connect('/system-management/orders/:order/edit', array('controller' => 'orders', 'action' => 'edit', 'admin' => true));
+	Router::connect('/system-management/orders/:order/delete', array('controller' => 'orders', 'action' => 'delete', 'admin' => true));
+	
 	// User Data Fields
 	Router::connect('/system-management/user-data-fields', array('controller' => 'users', 'action' => 'data_field_index', 'admin' => true));
 	Router::connect('/system-management/user-data-fields/new', array('controller' => 'users', 'action' => 'data_field_add', 'admin' => true));

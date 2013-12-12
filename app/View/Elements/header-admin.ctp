@@ -30,17 +30,22 @@
 						<li><a tabindex="-1" href="./bootswatch.less">bootswatch.less</a></li>
 					</ul>
 				</li>-->
-			</ul>
-			<ul class="nav navbar-nav">
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><?=__('CMS');?> <span class="caret"></span></a>
 					<ul class="dropdown-menu" aria-labelledby="User Management">
 						<li><?=$this->Html->link(__('Pages'), array('controller' => 'pages', 'action' => 'index'));?></li>
-						<li><?=$this->Html->link(__('Knowledge Base'), array('controller' => 'knowledge_base_articles', 'action' => 'index'));?></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><?=__('Knowledge Base');?> <span class="caret"></span></a>
+					<ul class="dropdown-menu" aria-labelledby="User Management">
+						<li><?=$this->Html->link(__('Articles'), array('controller' => 'knowledge_base_articles', 'action' => 'index'));?></li>
 						<li><?=$this->Html->link(__('Modalities'), array('controller' => 'modalities', 'action' => 'index'));?></li>
 						<li><?=$this->Html->link(__('Diseases'), array('controller' => 'diseases', 'action' => 'index'));?></li>
 					</ul>
 				</li>
+				<li><?=$this->Html->link(__('Products'), array('controller' => 'products', 'action' => 'index'));?></li>
+				<li><?=$this->Html->link(__('Orders'), array('controller' => 'orders', 'action' => 'index'));?></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="/logout"><?=__('Logout');?></a></li>

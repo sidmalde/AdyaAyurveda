@@ -18,7 +18,7 @@
 					<td><?=$modality['Modality']['modality'];?></td>
 					<td><?=$this->Time->niceShort($modality['Modality']['created']);?></td>
 					<td><?=$this->Time->niceShort($modality['Modality']['modified']);?></td>
-					<td class="actions">
+					<td class="actions condensed">
 						<div class="btn-group">
 							<button class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown"><?=__('Actions')?> <span class="caret"></span></button>
 							<ul class="dropdown-menu">

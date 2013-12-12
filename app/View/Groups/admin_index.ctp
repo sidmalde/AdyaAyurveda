@@ -7,7 +7,7 @@
 </h3>
 
 <div class="row">
-	<div class="col-xs-12">
+	<div class="col-md-12">
 		<ul class="nav nav-tabs" id="myTab">
 			<?php foreach ($groups as $index => $group): ?>
 				<? $activeLinkClass=($index == 0) ? 'class="active"': '';?>
@@ -26,7 +26,7 @@
 				<? $tabClass=($index == 0) ? 'active in': 'fade'; ?>
 				<div class="tab-pane <?=$tabClass;?>" id="<?=Sanitize::paranoid(strtolower($group['Group']['name']));?>">
 					<div class="row">
-						<div class="col-xs-1">
+						<div class="col-md-1">
 							<button class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown"><?=__('Actions')?> <span class="caret"></span></button>
 							<ul class="dropdown-menu">
 								<li><?=$this->Html->link('<i class="icon-cog"></i> '.__('Edit Group'), array('controller' => 'groups', 'action' => 'edit', 'group' => $group['Group']['id'], 'admin' => true), array('escape' => false));?></li>
@@ -34,7 +34,7 @@
 								<li><?=$this->Html->link('<i class="icon-plus"></i> '.__('Add User'), array('controller' => 'users', 'action' => 'add', 'admin' => true), array('escape' => false));?></li>
 							</ul>
 						</div>
-						<div class="col-xs-11">
+						<div class="col-md-11">
 							<dl class="dl-horizontal">
 								<dt><?=__('Description');?></dt><dd><?=$group['Group']['description'];?></dd>
 								<dt><?=__('Created');?></dt><dd><?=$this->Time->niceShort($group['Group']['created']);?></dd>
@@ -46,7 +46,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-xs-12">
+						<div class="col-md-12">
 							<? if (!empty($group['User'])): ?>
 								<table class="table table-condensed table-striped table-bordered table-hover">
 									<thead>
