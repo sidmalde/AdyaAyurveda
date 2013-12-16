@@ -9,6 +9,17 @@ class User extends AppModel {
 	var $hasMany = array(
 		'UserDataValue',
 		'UserNote',
+		'UserAttachment' => array(
+			'className' => 'Upload', 
+			'conditions' => array(
+				'UserAttachment.model_name' => 'User',
+			), 
+			'foreignKey' => 'model_id',
+		),
+		'Order' => array(
+			'className' => 'Order',
+			'foreignKey' => 'patient_id',
+		),
 	);
 	var $belongsTo = array(
 		'Group' => array(

@@ -88,7 +88,33 @@ class AppController extends Controller {
 		}
 		
 		$userTitles = $this->userTitles;
+		$allowedUploadExtensions = $this->allowedUploadExtensions;
 		
-		$this->set(compact(array('userTitles')));
+		$this->set(compact(array('userTitles', 'allowedUploadExtensions')));
+	}
+	
+	
+	function _checkAndUploadFile($folder, $file, $filename = null){
+		
+		App::import('Sanitize');
+		if(!is_array($file)){
+			return $file;
+		} elseif($file['size']){
+			if($filename){
+				$file['name'] = $filename;
+			} else {
+				$file['name'] = basename(Sanitize::paranoid($file['name'],array('.', '-', '_')));
+			}
+			
+			if (!file_exists('files/'.$folder)) {
+				$pathToCreate = 'files/'.$folder;
+				mkdir($pathToCreate, 0777, true);
+			}
+			
+			move_uploaded_file($file['tmp_name'], 'files/'.$folder.'/'.$file['name']);
+			return '/files/'.$folder.'/'.$file['name'];
+		} else {
+			return NULL;
+		}
 	}
 }

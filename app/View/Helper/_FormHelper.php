@@ -297,7 +297,7 @@ class FormHelper extends AppHelper {
  *
  * - `type` Form method defaults to POST
  * - `action`  The controller action the form submits to, (optional).
- * - `url`  The URL the form submits to. Can be a string or a URL array. If you use 'url'
+ * - `url`  The URL the form submits to. Can be a string or an URL array. If you use 'url'
  *    you should leave 'action' undefined.
  * - `default`  Allows for the creation of Ajax forms. Set this to false to prevent the default event handler.
  *   Will create an onsubmit attribute if it doesn't not exist. If it does, default action suppression
@@ -352,28 +352,13 @@ class FormHelper extends AppHelper {
 			}
 		}
 
-
-		if(isset($options['bootstrap']) && $options['bootstrap'] === false){
-			// this is when I don't want styling
-		} else {
-			// this is when I want bootstrap styling
-			$options['inputDefaults'] = array(
-				'before' => null,
-				'between' => '<div class="controls">',
-				'after' => '</div>',
-				'format' => null,
-				'class' => 'input-block-level',
-				'div' => array('class' => 'control-group'),
-				'label' => array('class' => 'control-label')
-			);
-		}
 		$options = array_merge(array(
 			'type' => ($created && empty($options['action'])) ? 'put' : 'post',
 			'action' => null,
 			'url' => null,
 			'default' => true,
 			'encoding' => strtolower(Configure::read('App.encoding')),
-			'inputDefaults' => array()),
+			'inputDefaults' => array('class' => 'form-control')),
 		$options);
 		$this->inputDefaults($options['inputDefaults']);
 		unset($options['inputDefaults']);
@@ -538,7 +523,6 @@ class FormHelper extends AppHelper {
 		$out .= $this->Html->useTag('formend');
 
 		$this->_View->modelScope = false;
-		$this->requestType = null;
 		return $out;
 	}
 
@@ -663,10 +647,10 @@ class FormHelper extends AppHelper {
  *
  * ### Options:
  *
- * - `escape` boolean - Whether or not to html escape the contents of the error.
+ * - `escape` bool - Whether or not to html escape the contents of the error.
  * - `wrap` mixed - Whether or not the error message should be wrapped in a div. If a
  *   string, will be used as the HTML tag to use.
- * - `class` string - The class name for the error message
+ * - `class` string - The classname for the error message
  *
  * @param string $field A field name, like "Modelname.fieldname"
  * @param string|array $text Error message as string or array of messages.
@@ -676,7 +660,7 @@ class FormHelper extends AppHelper {
  * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::error
  */
 	public function error($field, $text = null, $options = array()) {
-		$defaults = array('wrap' => true, 'class' => 'error-message help-inline', 'escape' => true);
+		$defaults = array('wrap' => true, 'class' => 'error-message', 'escape' => true);
 		$options = array_merge($defaults, $options);
 		$this->setEntity($field);
 
@@ -803,6 +787,9 @@ class FormHelper extends AppHelper {
 		if ($fieldName === null) {
 			$fieldName = implode('.', $this->entity());
 		}
+		if(empty($options['class'])){
+			$options['class'] = 'control-label';
+		}
 
 		if ($text === null) {
 			if (strpos($fieldName, '.') !== false) {
@@ -852,7 +839,7 @@ class FormHelper extends AppHelper {
  * @param array $blacklist A simple array of fields to not create inputs for.
  * @param array $options Options array. Valid keys are:
  * - `fieldset` Set to false to disable the fieldset. If a string is supplied it will be used as
- *    the class name for the fieldset element.
+ *    the classname for the fieldset element.
  * - `legend` Set to false to disable the legend for the generated input set. Or supply a string
  *    to customize the legend text.
  * @return string Completed form inputs.
@@ -1004,31 +991,6 @@ class FormHelper extends AppHelper {
 			unset($options['dateFormat'], $options['timeFormat']);
 		}
 
-		// for special bootstrap styles .input-prepend and .input-append, use 'prepend' and/or 'append' in the input options
-		// example1: 'prepend' => '<span class="add-on"><i class="icon-search"></i></span>'
-		// example2: 'append' => '<button class="btn" type="button">Go!</button>'
-		// example3: try both examples at the same time ;)
-		if(!empty($options['prepend']) && !empty($options['append'])){
-			// if it has input-prepend AND input-append
-			$options['between'] = $options['between'].'<div class="input-prepend input-append">'.$options['prepend'];
-			$options['after'] = $options['append'].'</div>'.$options['after'];
-		} elseif(!empty($options['prepend']) && empty($options['append'])){
-			// if it has input-prepend BUT NO input-append
-			$options['between'] = $options['between'].'<div class="input-prepend">'.$options['prepend'];
-			$options['after'] = '</div>'.$options['after'];
-		} elseif(empty($options['prepend']) && !empty($options['append'])){
-			// if it has input-append BUT NO input-prepend
-			$options['between'] = $options['between'].'<div class="input-append">';
-			$options['after'] = $options['append'].'</div>'.$options['after'];
-		}
-		unset($options['append'], $options['prepend']);
-
-		// if(!empty($options['type'])){
-		// 	if($options['type'] == 'checkbox' || $options['type'] == 'radio'){
-				
-		// 	}
-		// }
-
 		$type = $options['type'];
 		$out = array('before' => $options['before'], 'label' => $label, 'between' => $options['between'], 'after' => $options['after']);
 		$format = $this->_getFormat($options);
@@ -1112,7 +1074,6 @@ class FormHelper extends AppHelper {
  * @return array Options
  */
 	protected function _parseOptions($options) {
-		
 		$options = array_merge(
 			array('before' => null, 'between' => null, 'after' => null, 'format' => null),
 			$this->_inputDefaults,
@@ -1307,8 +1268,7 @@ class FormHelper extends AppHelper {
 		if (!$div) {
 			return array();
 		}
-
-		$divOptions = array('class' => 'input');
+		$divOptions = array('class' => 'form-group');
 		$divOptions = $this->addClass($divOptions, $options['type']);
 		if (is_string($div)) {
 			$divOptions['class'] = $div;
@@ -1548,7 +1508,7 @@ class FormHelper extends AppHelper {
 		}
 
 		foreach ($options as $optValue => $optTitle) {
-			$optionsHere = array('value' => $optValue, 'disabled' => false);
+			$optionsHere = array('value' => $optValue);
 
 			if (isset($value) && strval($optValue) === strval($value)) {
 				$optionsHere['checked'] = 'checked';
@@ -1562,11 +1522,8 @@ class FormHelper extends AppHelper {
 			);
 
 			if ($label) {
-				$labelOpts = is_array($label) ? $label : array();
-				$labelOpts += array('for' => $tagName);
-				$optTitle = $this->label($tagName, $optTitle, $labelOpts);
+				$optTitle = $this->Html->useTag('label', $tagName, '', $optTitle);
 			}
-
 			if (is_array($between)) {
 				$optTitle .= array_shift($between);
 			}
@@ -1667,16 +1624,17 @@ class FormHelper extends AppHelper {
  * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::hidden
  */
 	public function hidden($fieldName, $options = array()) {
-		$options += array('required' => false, 'secure' => true);
+		$secure = true;
 
-		$secure = $options['secure'];
-		unset($options['secure']);
-
+		if (isset($options['secure'])) {
+			$secure = $options['secure'];
+			unset($options['secure']);
+		}
 		$options = $this->_initInputField($fieldName, array_merge(
 			$options, array('secure' => self::SECURE_SKIP)
 		));
 
-		if ($secure === true) {
+		if ($secure && $secure !== self::SECURE_SKIP) {
 			$this->_secure(true, null, '' . $options['value']);
 		}
 
@@ -1763,7 +1721,7 @@ class FormHelper extends AppHelper {
 	}
 
 /**
- * Creates an HTML link, but access the URL using the method you specify (defaults to POST).
+ * Creates an HTML link, but access the url using the method you specify (defaults to POST).
  * Requires javascript to be enabled in browser.
  *
  * This method creates a `<form>` element. So do not use this method inside an existing form.
@@ -1780,7 +1738,7 @@ class FormHelper extends AppHelper {
  * @param string $title The content to be wrapped by <a> tags.
  * @param string|array $url Cake-relative URL or array of URL parameters, or external URL (starts with http://)
  * @param array $options Array of HTML attributes.
- * @param boolean|string $confirmMessage JavaScript confirmation message.
+ * @param bool|string $confirmMessage JavaScript confirmation message.
  * @return string An `<a />` element.
  * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::postLink
  */
@@ -1881,7 +1839,7 @@ class FormHelper extends AppHelper {
 		$divOptions = array('tag' => 'div');
 
 		if ($div === true) {
-			$divOptions['class'] = 'controls submit';
+			$divOptions['class'] = 'submit';
 		} elseif ($div === false) {
 			unset($divOptions);
 		} elseif (is_string($div)) {
@@ -1929,9 +1887,6 @@ class FormHelper extends AppHelper {
 			$tag = $this->Html->useTag('submitimage', $url, $options);
 		} else {
 			$options['value'] = $caption;
-			if (empty($options['class'])) {
-				$options['class'] = 'btn btn-ssl btn-small';
-			}
 			$tag = $this->Html->useTag('submit', $options);
 		}
 		$out = $before . $tag . $after;
@@ -1958,7 +1913,7 @@ class FormHelper extends AppHelper {
  *   that string is displayed as the empty element.
  * - `escape` - If true contents of options will be HTML entity encoded. Defaults to true.
  * - `value` The selected value of the input.
- * - `class` - When using multiple = checkbox the class name to apply to the divs. Defaults to 'checkbox'.
+ * - `class` - When using multiple = checkbox the classname to apply to the divs. Defaults to 'checkbox'.
  * - `disabled` - Control the disabled attribute. When creating a select box, set to true to disable the
  *   select box. When creating checkboxes, `true` will disable all checkboxes. You can also set disabled
  *   to a list of values you want to disable when creating checkboxes.
@@ -2056,8 +2011,12 @@ class FormHelper extends AppHelper {
 			$tag = 'selectstart';
 		}
 
-		if ($tag === 'checkboxmultiplestart') {
-			unset($attributes['required']);
+		if ($tag !== 'checkboxmultiplestart' &&
+			!isset($attributes['required']) &&
+			empty($attributes['disabled']) &&
+			$this->_introspectModel($this->model(), 'validates', $this->field())
+		) {
+			$attributes['required'] = true;
 		}
 
 		if (!empty($tag) || isset($template)) {
@@ -2887,19 +2846,13 @@ class FormHelper extends AppHelper {
 		if ($this->tagIsInvalid() !== false) {
 			$result = $this->addClass($result, 'form-error');
 		}
-
-		if (!empty($result['disabled'])) {
+		if (!empty($result['disabled']) || $secure === self::SECURE_SKIP) {
 			return $result;
 		}
-
 		if (!isset($result['required']) &&
 			$this->_introspectModel($this->model(), 'validates', $this->field())
 		) {
 			$result['required'] = true;
-		}
-
-		if ($secure === self::SECURE_SKIP) {
-			return $result;
 		}
 
 		$this->_secure($secure, $this->_secureFieldName($options));

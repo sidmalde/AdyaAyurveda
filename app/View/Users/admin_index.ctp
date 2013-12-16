@@ -48,7 +48,7 @@
 										<td><?=$user['mobile']; ?>&nbsp;</td>
 										<td><?=$user['active']; ?>&nbsp;</td>
 										<td><?=$user['deleted']; ?>&nbsp;</td>
-										<td class="actions">
+										<td class="condensed">
 											<div class="btn-group">
 												<button class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown"><?=__('Actions')?> <span class="caret"></span></button>
 												<ul class="dropdown-menu">

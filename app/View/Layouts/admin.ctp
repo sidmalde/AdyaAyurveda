@@ -21,6 +21,7 @@
 	<?=$this->Html->css('core'); ?>
 	
 	<?=$this->Html->script('bootstrap.min'); ?>
+	<?=$this->Html->script('jquery-ui-1.10.3.custom.min'); ?>
 	<?=$this->Html->script('core'); ?>
 </head>
 <body class="admin-layout">

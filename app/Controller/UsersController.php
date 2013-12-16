@@ -40,6 +40,10 @@ class UsersController extends AppController {
 		$this->User->contain(array(
 			'Group',
 			'UserNote',
+			'UserAttachment',
+			'Order' => array(
+				'OrderItem' => 'Product',
+			),
 		));
 		$this->request->data = $user = $this->User->find('first', $options);
 		
@@ -140,6 +144,8 @@ class UsersController extends AppController {
 			'tiff' => 'tiff',
 		);
 		
+		$this->set(compact(array('allowedExtensions')));
+		
 		if (!empty($this->request->data)) {
 			if (!empty($this->request->data['User']['profileSave'])) {
 				$save = false;
@@ -192,6 +198,39 @@ class UsersController extends AppController {
 				
 				$this->redirect($this->referer());
 			} else {
+				if (!empty($this->request->data['User']['attachment'])) {
+					if(is_array($this->data['User']['attachment'])){
+						if($this->data['User']['attachment']['error'] == 0){
+							if(isset($this->data['User']['attachment']['tmp_name']) && isset($this->data['User']['attachment']['name'])){
+								$file_parts = pathinfo($this->data['User']['attachment']['name']);
+								if (in_array(strtolower($file_parts['extension']), $allowedExtensions)) {
+									if($location = $this->_checkAndUploadFile('users/'.$user['User']['id'], $this->request->data['User']['attachment'])){
+										$userAttachment = $this->User->UserAttachment->create();
+										$userAttachment['UserAttachment']['model_name'] = 'User';
+										$userAttachment['UserAttachment']['model_id'] = $user['User']['id'];
+										$userAttachment['UserAttachment']['user_id'] = $this->Auth->user('id');
+										$userAttachment['UserAttachment']['location'] = $location;
+										$userAttachment['UserAttachment']['content_type'] =$this->request->data['User']['attachment']['type'];
+										$userAttachment['UserAttachment']['filesize'] = $this->request->data['User']['attachment']['size'];
+										$userAttachment['UserAttachment']['label'] = Sanitize::paranoid($this->request->data['User']['attachment']['name'],array('.', '-', '_'));
+										$userAttachment['UserAttachment']['filename'] = $this->request->data['User']['attachment']['name'];
+										$userAttachment['UserAttachment']['downloads'] = 0;
+										$userAttachment['UserAttachment']['deleted'] = 0;
+										$this->User->UserAttachment->save($userAttachment['UserAttachment']);
+										$this->Session->setFlash(__('Attachment has been saved', true), 'flash_success');
+									} else {
+										$this->Session->setFlash(__('Unable to save attachment', true), 'flash_failure');
+									}
+								} else {
+									$this->Session->setFlash(__('Invalid file format', true), 'flash_failure');
+								}
+							}
+						} else {
+							$this->Session->setFlash(__('Unable to save attachment', true), 'flash_failure');
+						}
+					}
+				}
+				
 				if (!empty($this->request->data['UserNote']['summary'])) {
 					if (!empty($this->request->data['UserNote']['id'])) {
 						$userNote['id'] = $this->request->data['UserNote']['id'];
@@ -324,6 +363,23 @@ class UsersController extends AppController {
 			}
 		}
 		$this->redirect($this->referer());
+	}
+	
+	public function admin_delete_attachment() {
+		if (empty($this->params['userAttachment'])) {
+			$this->Session->setFlash(__('Invalid User Attachment Id'), 'flash_failure');
+			$this->redirect('index');
+		}
+		
+		$this->User->UserAttachment->contain();
+		$userAttachment = $this->User->UserAttachment->findById($this->params['userAttachment']);
+		
+		if ($deleted = $this->User->UserAttachment->delete($this->params['userAttachment'])) {
+			$this->Session->setFlash(__('User Attachment deleted'), 'flash_success');
+		} else {
+			$this->Session->setFlash(__('User Attachment was not deleted'), 'flash_failure');
+		}
+		$this->redirect(array('action' => 'view', 'user' => $userAttachment['UserAttachment']['model_id']));
 	}
 	
 	public function login() {

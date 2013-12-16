@@ -1,4 +1,18 @@
 $(document).ready(function(){
+	$( "#datepicker" ).datepicker();
+	
+	$('input.input-file-real').change(function() {
+		$fakeInput = $(this).data('fake-input');
+		$('#'+$fakeInput).val($(this).val().replace("C:\\fakepath\\", ""));
+	});
+	
+	$('.input-file-real-clear').click(function() {
+		$realInput = $(this).data('real-input');
+		$fakeInput = $(this).data('fake-input');
+		$('#'+$realInput).val('');
+		$('#'+$fakeInput).val('');
+	});
+	
 	$('.clear-form').on('click', function() {
 		$formId = $(this).closest('form').attr('id');
 		$clearingClass = $(this).data('clearing-class');
