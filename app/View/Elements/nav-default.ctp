@@ -9,6 +9,11 @@
 	</div>
 	<div class="navbar-collapse collapse navbar-responsive-collapse">
 		<ul class="nav navbar-nav">
+			<? if (!empty($pagesInNav)) : ?>
+				<? foreach($pagesInNav as $pageInNav): ?>
+					<li><a href="<?=$pageInNav['Page']['url'];?>"><?=$pageInNav['Page']['label'];?></a></li>
+				<? endforeach; ?>
+			<? endif; ?>
 			<!--<li class="active"><a href="#">Active</a></li>
 			<li><a href="#">Link</a></li>
 			<li class="dropdown">

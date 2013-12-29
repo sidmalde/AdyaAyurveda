@@ -71,23 +71,113 @@ class PagesController extends AppController {
 	
 	function home() {
 		$this->layout = 'default';
-		$pageTitle = __('Welcome to Adya-Ayurveda');
-		$this->set(compact(array('pageTitle')));
+		$title_for_layout = __('Welcome to Adya-Ayurveda');
+		$this->set(compact(array('title_for_layout')));
+	}
+	
+	function venues() {
+		$this->layout = 'default';
+		$title_for_layout = __('Venues');
+		$this->set(compact(array('title_for_layout')));
+	}
+	
+	function view() {
+		$this->layout = 'default';
+		$url = '/'.$this->request->url;
+		
+		$this->Page->contain();
+		$options = array(
+			'conditions' => array(
+				'Page.url' => $url
+			),
+		);
+		$page = $this->Page->find('first', $options);
+		if (empty($page)) {
+			$this->Session->setFlash(__('Page could not be found.'), 'flash_failure');
+			$this->redirect('/');
+		}
+		// die;
+		$title_for_layout = $page['Page']['title'];
+		$content = $page['Page']['content'];
+		
+		$this->set(compact(array('title_for_layout', 'content')));
 	}
 	
 	function admin_index() {
+		$this->Page->contain(array(
+			'ChildPage' => array(
+				'ChildPage',
+			),
+		));
+		$options = array(
+			'fields' => array(
+				'id',
+				'label',
+				'title',
+				'url',
+			),
+			'conditions' => array(
+				'Page.parent_page_id' => null,
+			)
+		);
+		$pages = $this->Page->find('all', $options);
 		
+		$title_for_layout = __('Content Pages');
+		$this->set(compact(array('title_for_layout', 'pages')));
 	}
 	
 	function admin_add() {
+		if (!empty($this->request->data)) {
+			if ($this->Page->save($this->request->data)) {
+				$this->Session->setFlash(__('New content page has been saved successfully'), 'flash_success');
+				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('New content page could not be saved, please try again'), 'flash_failure');
+			}
+		}
 		
+		if (!empty($this->request->params['page'])) {
+			$parentPageId = $this->request->params['page'];
+		} elseif (!empty($this->request->data['Page']['parent_page_id'])) {
+			$parentPageId = $this->request->data['Page']['parent_page_id'];
+		}
+		
+		$title_for_layout = __('Content Pages :: New Page');
+		
+		$this->set(compact(array('title_for_layout', 'parentPageId')));
 	}
 	
 	function admin_edit() {
+		if (empty($this->request->params['page'])) {
+			$this->Session->setFlash(__('Invalid Request'), 'flash_failure');
+			$this->redirect($this->referer());
+		}
 		
+		if (!empty($this->request->data)) {
+			if ($this->Page->save($this->request->data)) {
+				$this->Session->setFlash(__('New content page has been saved successfully'), 'flash_success');
+				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('New content page could not be saved, please try again'), 'flash_failure');
+			}
+		}
+		
+		$this->Page->contain();
+		$page = $this->request->data = $this->Page->findById($this->request->params['page']);
+		$title_for_layout = __('Content Pages :: Edit Page');
+		$this->set(compact(array('title_for_layout', 'page')));
 	}
 	
 	function admin_delete() {
-		
+		if (empty($this->request->params['page'])) {
+			$this->Session->setFlash(__('Invalid Request'), 'flash_failure');
+		} else {
+			if ($this->Page->delete($this->request->params['page'])) {
+				$this->Session->setFlash(__('Page has been deleted successfully'), 'flash_success');
+			} else {
+				$this->Session->setFlash(__('Page could not be deleted, please try again'), 'flash_failure');
+			}
+		}
+		$this->redirect($this->referer());
 	}
 }

@@ -102,7 +102,15 @@ body.admin-layout {
 h1, h2, h3, h4, h5, h6 {
 	border: none;
 	margin-bottom: 10px;
+	color: #008500;
 }
+
+h1 {
+	font-size: 1.8em;
+	font-weight: 800;
+	border-bottom: 2px solid rgba(0, 133, 0, 0.4);
+}
+
 
 .clear{
 	clear: both;
@@ -204,4 +212,27 @@ table .header:hover {
 }
 .input-append, .input-prepend{
 	margin-bottom: 0;
+}
+
+.input-prepend .add-on{
+	line-height:20px;
+	height:30px;
+	padding:4px 8px;
+}
+.input-prepend .add-on, .input-append .add-on{
+	cursor: pointer;
+	font-size: 16px;
+}
+.input-append .add-on.btn-ssl, .input-prepend .add-on.btn-ssl{
+	background-color: #3B6C9C;
+	text-shadow: 0 1px 0 #000;
+}
+
+.box-border-sm{
+	margin: 10px;
+	border: 1px solid rgba(0, 133, 0, 0.4);
+}
+
+#map-canvas {
+	height: 300px;
 }

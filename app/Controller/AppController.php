@@ -90,9 +90,33 @@ class AppController extends Controller {
 		$userTitles = $this->userTitles;
 		$allowedUploadExtensions = $this->allowedUploadExtensions;
 		
+		// Get the Nav
+		$this->_getNavigation();
+		
 		$this->set(compact(array('userTitles', 'allowedUploadExtensions')));
 	}
 	
+	function _getNavigation() {
+		App::import('Model', 'Page');
+		$this->Page = new Page();
+		$this->Page->contain(array(
+			'ChildPage' => array(
+				'ChildPage'
+			),
+		));
+		$options = array(
+			'fields' => array(
+				'label',
+				'url'
+			),
+			'conditions' => array(
+				'Page.parent_page_id' => null,
+				'Page.url !=' => '/',
+			),
+		);
+		$pagesInNav = $this->Page->find('all', $options);
+		$this->set(compact(array('pagesInNav')));
+	}
 	
 	function _checkAndUploadFile($folder, $file, $filename = null){
 		

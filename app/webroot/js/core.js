@@ -1,5 +1,7 @@
 $(document).ready(function(){
-	$( "#datepicker" ).datepicker();
+	if ($( "#datepicker" ).length > 0) {
+		$( "#datepicker" ).datepicker();
+	}
 	
 	$('input.input-file-real').change(function() {
 		$fakeInput = $(this).data('fake-input');
@@ -59,8 +61,50 @@ $(document).ready(function(){
 			console.log('datatables js failed');
 		}
 	}
+	
+	if($('#map-canvas').length > 0){
+		initializeMap();
+	}
+	
+	if($('.viewMap').length > 0){
+		$('.viewMap').click(function(){
+			goToAddress($(this).data('latlng'));
+		});
+		$('.viewMap:first').click();
+	}
 });
 
 function animBottomMargin(){
 	$('#container').animate({paddingBottom: $('#bottom-shade').outerHeight() + parseInt($('#bottom-shade').css('marginBottom').replace('px', '')) +'px'}, 500);
+}
+
+var geocoder;
+var map;
+function initializeMap() {
+	geocoder = new google.maps.Geocoder();
+	var myLatlng = new google.maps.LatLng('51.618047', '-0.311307');
+	var mapOptions = {
+		center: myLatlng,
+		zoom: 14,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+	map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+	var marker = new google.maps.Marker({
+		position: myLatlng,
+		map: map,
+	});
+}
+
+function goToAddress($address) {
+	geocoder.geocode( { 'address': $address}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			map.setCenter(results[0].geometry.location);
+			var marker = new google.maps.Marker({
+				map: map,
+				position: results[0].geometry.location,
+			});
+		} else {
+			alert('Geocode was not successful for the following reason: ' + status);
+		}
+	});
 }

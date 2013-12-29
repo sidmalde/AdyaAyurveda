@@ -1,8 +1,9 @@
 <?php
 
-	Router::connect('/', array('controller' => 'pages', 'action' => 'home'));
+	Router::connect('/', array('controller' => 'pages', 'action' => 'view'));
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
+	Router::connect('/venues', array('controller' => 'pages', 'action' => 'venues'));
 	
 	// Groups
 	Router::connect('/system-management/groups', array('controller' => 'groups', 'action' => 'index', 'admin' => true));
@@ -22,6 +23,7 @@
 	// pages
 	Router::connect('/content-management/pages', array('controller' => 'pages', 'action' => 'index', 'admin' => true));
 	Router::connect('/content-management/pages/new', array('controller' => 'pages', 'action' => 'add', 'admin' => true));
+	Router::connect('/content-management/pages/:page/new', array('controller' => 'pages', 'action' => 'add', 'admin' => true));
 	Router::connect('/content-management/pages/:page', array('controller' => 'pages', 'action' => 'view', 'admin' => true));
 	Router::connect('/content-management/pages/:page/edit', array('controller' => 'pages', 'action' => 'edit', 'admin' => true));
 	Router::connect('/content-management/pages/:page/delete', array('controller' => 'pages', 'action' => 'delete', 'admin' => true));
@@ -69,6 +71,7 @@
 	
 	
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+	Router::connect('/*', array('controller' => 'pages', 'action' => 'view'));
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on
