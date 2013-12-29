@@ -22,12 +22,14 @@
 <body>
 	<div class="container">
 		<div id="content" class="row">
-			<div class="col-md-12">
+			<div class="col-md-9">
 				<?=$this->element('header-default');?>
 				<?=$this->element('nav-default');?>
 				<?=$this->Session->flash(); ?>
 
 				<?=$this->fetch('content'); ?>
+			</div>
+			<div class="col-md-3">
 			</div>
 		</div>
 		<div id="footer" class="row">
