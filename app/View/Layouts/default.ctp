@@ -22,14 +22,24 @@
 <body>
 	<div class="container">
 		<div id="content" class="row">
-			<div class="col-md-9">
+			<div class="col-md-12">
 				<?=$this->element('header-default');?>
 				<?=$this->element('nav-default');?>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-9">
 				<?=$this->Session->flash(); ?>
 
 				<?=$this->fetch('content'); ?>
 			</div>
 			<div class="col-md-3">
+				<div class="well">
+					<h3><?=__('Contact Us');?></h3>
+					<p><i class="fa fa-phone fa-3"></i> <a href="callto:02032877299">020 3287 7299</a></p>
+					<p><i class="fa fa-envelope fa-3"></i> <a href="mailto:info@adya-ayurveda.com" traget="_blank">info@adya-ayurveda.com</a></p>
+					</p>
+				</div>
 			</div>
 		</div>
 		<div id="footer" class="row">
