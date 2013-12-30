@@ -22,7 +22,7 @@ class ModalitiesController extends AppController {
 			$this->Modality->create();
 			if ($this->Modality->save($this->request->data)) {
 				$this->Session->setFlash(__('Modality %s has been saved.', $this->request->data['Modality']['modality']), 'flash_success');
-				$this->redirect('index');
+				$this->redirect(array('action' => 'admin_index'));
 			} else {
 				$this->Session->setFlash(__('Modality could not be saved, please try again.'), 'flash_failure');
 			}

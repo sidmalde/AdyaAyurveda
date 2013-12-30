@@ -93,7 +93,7 @@
 .overflow-visible{overflow: visible;}
 div.required.errorField label{ color: #900 !important; }
 div.required label:after{ content: ' *' }
-
+hr {font-size: 1.7em; font-weight: 800; border-bottom: 2px solid rgba(0, 133, 0, 0.4);}
 
 body.admin-layout {
   padding-top: 60px;
@@ -114,18 +114,54 @@ h1 {
 h2 {
 	font-size: 1.7em;
 	font-weight: 800;
-	border-bottom: 2px solid rgba(0, 133, 0, 0.4);
+	border-bottom: 1px solid rgba(0, 133, 0, 0.4);
 }
 
 h3 {
 	font-size: 1.5em;
 	font-weight: 800;
-	border-bottom: 2px solid rgba(0, 133, 0, 0.4);
+	border-bottom: 1px solid rgba(0, 133, 0, 0.4);
 }
 
+.well {
+	background-color: #E8FFE2;
+}
+
+.fa-xs {
+	font-size: 2em;
+}
+
+.fa-sm {
+	font-size: 3em;
+}
+
+.fa-md {
+	font-size: 5em;
+}
+
+.fa-lg {
+	font-size: 7em;
+}
+
+.fa-xl {
+	font-size: 9em;
+}
 
 .clear{
 	clear: both;
+}
+
+.bgrnd-white {
+	background-color: #FFFFFF;
+	border: 1px solid #ddd;
+	border-top-color: transparent;
+}
+
+p{
+	padding: 5px 5px 5px 5px;
+	font-size: 0.95em;
+	text-align: justify;
+	line-height: 130%;
 }
 
 .navbar-brand {

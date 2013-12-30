@@ -383,7 +383,7 @@ class UsersController extends AppController {
 	}
 	
 	public function login() {
-		$this->layout = 'default';
+		$this->layout = 'login';
 		if ($this->Auth->user()) {
 			if ($this->Auth->user('group_id') == '52346d30-68f8-4e91-b19b-1368d96041f1') {
 				$this->redirect('/system-management/users');

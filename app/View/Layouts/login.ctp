@@ -18,14 +18,20 @@
 	<?=$this->Html->css('core'); ?>
 	
 	<?=$this->Html->script('bootstrap.min'); ?>
-	<?#=$this->Html->script('jquery-ui-1.10.3.custom.min'); ?>
 	<?=$this->Html->script('core'); ?>
 </head>
-<body class="admin-layout">
-	<?=$this->element('header-admin');?>
+<body>
 	<div class="container">
+		<div id="content" class="row">
+			<div class="col-md-12">
+				<?=$this->element('header-default');?>
+				<?=$this->element('nav-default');?>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-12">
+				<?=$this->Session->flash(); ?>
+
 				<?=$this->fetch('content'); ?>
 			</div>
 		</div>
@@ -33,9 +39,7 @@
 			<div class="col-md-12">
 			</div>
 		</div>
-		<div class="clear">
-		</div>
+		<div class="clear">&nbsp;</div>
 	</div>
-	<?=$this->element('flash_container');?>
 </body>
 </html>

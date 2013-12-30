@@ -22,6 +22,21 @@ class DiseasesController extends AppController {
 		$this->set(compact(array('diseases', 'title_for_layout')));
 	}
 	
+	function admin_view() {
+		if (empty($this->request->params['disease'])) {
+			$this->Session->setFlash(__('Invalid Request'), 'flash_failure');
+			$this->redirect($this->referer());
+		}
+		
+		$this->Disease->contain(array(
+			'KnowledgeBaseArticle' => 'Modality',
+		));
+		$disease = $this->Disease->findById($this->request->params['disease']);
+		
+		$title_for_layout = __('Disease :: Edit %s', $disease['Disease']['disease']);
+		$this->set(compact(array('title_for_layout', 'disease')));
+	}
+	
 	function admin_add() {
 		if (!empty($this->request->data)) {
 			$this->Disease->create();
