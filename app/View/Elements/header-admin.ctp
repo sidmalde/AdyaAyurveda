@@ -1,7 +1,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-			<a href="/" class="navbar-brand"><?=__('Adya Ayurveda');?></a>
+			<a href="/" class="navbar-brand hidden-lg hidden-md"><i class="fa fa-home fa-3"></i>&nbsp;</a>
 			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
@@ -10,6 +10,7 @@
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
 			<ul class="nav navbar-nav">
+				<li class=" hidden-xs hidden-sm"><a href="/" class="navbar-brand"><?=__('Adya Ayurveda');?></a></li>
 				<!--<li><?=$this->Html->link(__('Users'), array('controller' => 'users', 'action' => 'index'));?></li>-->
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><?=__('Users');?> <span class="caret"></span></a>

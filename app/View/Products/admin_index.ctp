@@ -1,10 +1,10 @@
 <h2>
 	<?=$title_for_layout;?>
 	<div class="btn-group pull-right">
-		<?=$this->Html->link(__('New Product'), array('action' => 'add'), array('class' => 'btn btn-primary btn-sm'));?>
+		<?=$this->Html->link(__('New Product'), array('action' => 'add'), array('class' => 'btn btn-success btn-xs'));?>
 	</div>
 </h2>
-<div class="well">
+<div class="outer-5">
 	<? if(!empty($products)): ?>
 		<table class="table table-condensed table-striped table-bordered table-hover">
 			<tr>

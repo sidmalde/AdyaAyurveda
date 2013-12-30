@@ -1,8 +1,8 @@
 <h3>
 	<?=@$pageTitle;?>
 	<div class="btn-group pull-right">
-		<?=$this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add'), array('class' => 'btn btn-primary btn-sm'));?>
-		<?=$this->Html->link(__('New Group'), array('controller' => 'groups', 'action' => 'add'), array('class' => 'btn btn-primary btn-sm'));?>
+		<?=$this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add'), array('class' => 'btn btn-success btn-xs'));?>
+		<?=$this->Html->link(__('New Group'), array('controller' => 'groups', 'action' => 'add'), array('class' => 'btn btn-success btn-xs'));?>
 	</div>
 </h3>
 

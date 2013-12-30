@@ -1,7 +1,7 @@
 <h3>
 	<?=@$pageTitle;?>
 	<div class="btn-group pull-right">
-		<?=$this->Html->link(__('New Data Field'), array('controller' => 'users', 'action' => 'data_field_add'), array('class' => 'btn btn-primary btn-sm'));?>
+		<?=$this->Html->link(__('New Data Field'), array('controller' => 'users', 'action' => 'data_field_add'), array('class' => 'btn btn-success btn-xs'));?>
 	</div>
 </h3>
 

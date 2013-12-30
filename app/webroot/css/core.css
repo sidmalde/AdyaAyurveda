@@ -132,6 +132,10 @@ h3 {
 	padding-right: 0px;
 }
 
+.tab-content {
+	overflow: inherit;
+}
+
 .fa-xs {
 	font-size: 2em;
 }

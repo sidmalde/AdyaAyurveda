@@ -1,7 +1,7 @@
 <h3>
 	<?=@$pageTitle;?>
 	<div class="btn-group pull-right">
-		<?=$this->Html->link(__('Back'), array('controller' => 'groups', 'action' => 'index'), array('class' => 'btn btn-primary btn-sm'));?>
+		<?=$this->Html->link(__('Back'), array('controller' => 'groups', 'action' => 'index'), array('class' => 'btn btn-success btn-xs'));?>
 	</div>
 </h3>
 <br />
