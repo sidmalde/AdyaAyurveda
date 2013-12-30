@@ -127,6 +127,11 @@ h3 {
 	background-color: #E8FFE2;
 }
 
+.navbar-collapse.collapse.navbar-responsive-collapse {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
 .fa-xs {
 	font-size: 2em;
 }

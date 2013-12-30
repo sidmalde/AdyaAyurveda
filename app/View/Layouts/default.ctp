@@ -41,7 +41,7 @@
 					body into balance has far reaching effects on the way 
 					you feel. You can change the quality of your life if 
 					you follow a few simple methods of living, eating and 
-					taking herbal food supplements.” Dr Naram
+					taking herbal food supplements.” -Dr Naram
 				</p>
 				<img src="/img/pics/ayurveda-basil.jpg" />
 				<h3><?=__('Contact Us');?></h3>
