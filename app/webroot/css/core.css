@@ -94,7 +94,7 @@
 div.required.errorField label{ color: #900 !important; }
 div.required label:after{ content: ' *' }
 hr {font-size: 1.7em; font-weight: 800; border-bottom: 2px solid rgba(0, 133, 0, 0.4);}
-
+.top-spacer {margin-top: 20px;}
 body.admin-layout {
   padding-top: 60px;
 }
@@ -134,6 +134,13 @@ h3 {
 
 .tab-content {
 	overflow: inherit;
+}
+
+address {
+	font-size: 1.2em;
+	color: #6d6c6c;
+	line-height: 140%;
+	height: 145px;
 }
 
 .fa-xs {

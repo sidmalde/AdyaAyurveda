@@ -140,13 +140,13 @@ class OrdersController extends AppController {
 	}
 	
 	function admin_delete() {
-		if (empty($this->request->params['product'])) {
+		if (empty($this->request->params['order'])) {
 			$this->Session->setFlash(__('Invalid Request'), 'flash_failure');
 		} else {
-			if ($this->Product->delete($this->request->params['product'])) {
-				$this->Session->setFlash(__('Product successfully deleted.'), 'flash_success');
+			if ($this->Order->delete($this->request->params['order'])) {
+				$this->Session->setFlash(__('Order successfully deleted.'), 'flash_success');
 			} else {
-				$this->Session->setFlash(__('Could not delete Product, please try again.'), 'flash_failure');
+				$this->Session->setFlash(__('Could not delete Order, please try again.'), 'flash_failure');
 			}
 		}
 		$this->redirect($this->referer());

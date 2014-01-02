@@ -52,7 +52,7 @@ class UsersController extends AppController {
 			$this->redirect('index');
 		}
 		$groups = $this->User->Group->find('list');
-		$pageTitle = sprintf(__('%ss &#187; %s'), $user['Group']['name'], $user['User']['fullnameNoTitle']);
+		$pageTitle = sprintf(__('%s &#187; %s'), $user['Group']['name'], $user['User']['fullnameNoTitle']);
 		
 		$this->loadModel('Country');
 		$countries = $this->Country->getIsoNameList();
@@ -380,6 +380,23 @@ class UsersController extends AppController {
 			$this->Session->setFlash(__('User Attachment was not deleted'), 'flash_failure');
 		}
 		$this->redirect(array('action' => 'view', 'user' => $userAttachment['UserAttachment']['model_id']));
+	}
+	
+	public function admin_delete_user_note() {
+		if (empty($this->params['userNote'])) {
+			$this->Session->setFlash(__('Invalid User Attachment Id'), 'flash_failure');
+			$this->redirect('index');
+		}
+		
+		$this->User->UserNote->contain();
+		$userNote = $this->User->UserNote->findById($this->params['userNote']);
+		
+		if ($deleted = $this->User->UserNote->delete($this->params['userNote'])) {
+			$this->Session->setFlash(__('User Note deleted'), 'flash_success');
+		} else {
+			$this->Session->setFlash(__('User Note was not deleted'), 'flash_failure');
+		}
+		$this->redirect(array('action' => 'view', 'user' => $userNote['UserNote']['user_id']));
 	}
 	
 	public function login() {

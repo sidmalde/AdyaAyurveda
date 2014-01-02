@@ -32,9 +32,9 @@
 									<th><?=__('Email'); ?></th>
 									<th><?=__('Name'); ?></th>
 									<th><?=__('City'); ?></th>
+									<th><?=__('Gender'); ?></th>
 									<th><?=__('Mobile'); ?></th>
 									<th><?=__('Active'); ?></th>
-									<th><?=__('Deleted'); ?></th>
 									<th>
 										&nbsp;
 									</th>
@@ -45,9 +45,9 @@
 										<td><?=$user['email']; ?>&nbsp;</td>
 										<td><?=$user['title'].' '.$user['firstname'].' '.$user['lastname']; ?>&nbsp;</td>
 										<td><?=$user['city']; ?>&nbsp;</td>
+										<td><?=$user['gender']; ?>&nbsp;</td>
 										<td><?=$user['mobile']; ?>&nbsp;</td>
 										<td><?=$user['active']; ?>&nbsp;</td>
-										<td><?=$user['deleted']; ?>&nbsp;</td>
 										<td class="condensed">
 											<div class="btn-group">
 												<button class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown"><?=__('Actions')?> <span class="caret"></span></button>

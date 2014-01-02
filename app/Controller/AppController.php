@@ -34,8 +34,8 @@ class AppController extends Controller {
 	public $helpers = array('Html', 'Form', 'Session', 'Number', 'Time', 'Text');
 	
 	public $userGenders = array(
-		'Male' => 'Male',
-		'Female' => 'Female',
+		'Mal' => 'Male',
+		'Fem' => 'Female',
 	);
 	
 	public $userMaritalStatuses = array(

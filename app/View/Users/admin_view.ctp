@@ -1,19 +1,13 @@
 <?=$this->Form->create('User', array('url' => $this->Html->url(array('controller' => 'users', 'action' => 'edit', 'user' => $user['User']['id'])), 'class' => 'form form-user-note-edit', 'type' => 'file')); ?>
-	<div class="row">
-		<div class="col-md-12 page-header">
-			<div class="row">
-				<div class="col-md-8"><h3><?=@$pageTitle;?></h3></div>
-				<div class="col-md-3">
-					<div class="btn-group pull-right">
-						<?=$this->Html->link(__('Back'), array('action' => 'index'), array('class' => 'btn btn-danger'));?>
-						<?=$this->Form->submit(__('Save Changes'), array('div' => false, 'label' => false, 'type' => 'submit', 'class' => 'btn btn-success'));?>
-					</div>
-				</div>
-			</div>
+	<h2>
+		<?=$pageTitle;?>
+		<div class="btn-group pull-right">
+			<?=$this->Html->link(__('Back'), array('action' => 'index'), array('class' => 'btn btn-xs btn-danger'));?>
+			<?=$this->Form->submit(__('Save Changes'), array('div' => false, 'label' => false, 'type' => 'submit', 'class' => 'btn btn-xs btn-success'));?>
 		</div>
-	</div>
+	</h2>
 
-	<div class="row">
+	<div class="outer-5">
 		<div class="col-md-12">
 			<div class="tabbable">
 				<ul class="nav nav-tabs" id="user-view-tabbing">

@@ -19,6 +19,7 @@
 	Router::connect('/system-management/users/:user/edit', array('controller' => 'users', 'action' => 'edit', 'admin' => true));
 	Router::connect('/system-management/users/:user/delete', array('controller' => 'users', 'action' => 'delete', 'admin' => true));
 	Router::connect('/system-management/users/:userAttachment/delete-attachment', array('controller' => 'users', 'action' => 'delete_attachment', 'admin' => true));
+	Router::connect('/system-management/users/:userNote/delete-note', array('controller' => 'users', 'action' => 'delete_user_note', 'admin' => true));
 
 	// pages
 	Router::connect('/content-management/pages', array('controller' => 'pages', 'action' => 'index', 'admin' => true));
