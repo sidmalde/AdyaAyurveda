@@ -18,8 +18,17 @@ class OrdersController extends AppController {
 		));
 		$orders = $this->Order->find('all');
 		
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-plus-square large"></i>',
+			'url' => array('controller' => 'orders', 'action' => 'add'),
+			'options' => array(
+				'class' => 'btn btn-success',
+				'escape' => false,
+			),
+		);
+
 		$title_for_layout = __('Orders');
-		$this->set(compact(array('title_for_layout', 'orders')));
+		$this->set(compact(array('headerButtons', 'title_for_layout', 'orders')));
 	}
 	
 	function admin_add() {
@@ -61,7 +70,7 @@ class OrdersController extends AppController {
 				
 				if ($actualCount == $saveCount) {
 					$this->Session->setFlash(__('All orders created successfully'), 'flash_success');
-					$this->redirect('index');
+					$this->redirect(array('action' => 'index'));
 				} else {
 					$this->Session->setFlash(__('All orders could not be created successfully'), 'flash_failure');
 				}
@@ -69,17 +78,27 @@ class OrdersController extends AppController {
 				$this->Session->setFlash(__('No order items for order'), 'flash_failure');
 			}
 		}
+
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-reply"></i> ' . __('Back'),
+			'url' => array('controller' => 'orders', 'action' => 'index'),
+			'options' => array(
+				'class' => 'btn btn-danger',
+				'escape' => false,
+			),
+		);
+
 		$products = $this->Order->OrderItem->Product->findList();
 		$patients = $this->Order->User->getPatientList();
 		$title_for_layout = __('Orders :: New Order');
-		$this->set(compact(array('title_for_layout', 'products', 'patients')));
+		$this->set(compact(array('headerButtons', 'title_for_layout', 'products', 'patients')));
 	}
 	
 	
 	function admin_edit() {
 		if (empty($this->request->params['order'])) {
 			$this->Session->setFlash(__('Invalid Request'), 'flash_failure');
-			$this->redirect('index');
+			$this->redirect(array('action' => 'index'));
 		}
 		
 		if (!empty($this->request->data)) {
@@ -118,7 +137,7 @@ class OrdersController extends AppController {
 				
 				if ($actualCount == $saveCount) {
 					$this->Session->setFlash(__('All orders created successfully'), 'flash_success');
-					$this->redirect('index');
+					$this->redirect(array('action' => 'index'));
 				} else {
 					$this->Session->setFlash(__('All orders could not be created successfully'), 'flash_failure');
 				}
@@ -135,8 +154,17 @@ class OrdersController extends AppController {
 		$products = $this->Order->OrderItem->Product->findList();
 		$patients = $this->Order->User->getPatientList();
 		
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-reply"></i> ' . __('Back'),
+			'url' => array('controller' => 'orders', 'action' => 'index'),
+			'options' => array(
+				'class' => 'btn btn-danger',
+				'escape' => false,
+			),
+		);
+
 		$title_for_layout = __('Orders :: Edit Order');
-		$this->set(compact(array('title_for_layout', 'order', 'products', 'patients')));
+		$this->set(compact(array('headerButtons', 'title_for_layout', 'order', 'products', 'patients')));
 	}
 	
 	function admin_delete() {

@@ -1,9 +1,3 @@
-<h2>
-	<?=$title_for_layout;?>
-	<div class="btn-group pull-right">
-		<?=$this->Html->link(__('Back'), array('action' => 'index'), array('class' => 'btn btn-danger btn-xs'));?>
-	</div>
-</h2>
 <div class="well">
 	<?=$this->Form->create('Order');?>
 		<?=$this->Form->input('patient_id', array('empty' => __('Please select a patient:'), 'options' => $patients));?>
