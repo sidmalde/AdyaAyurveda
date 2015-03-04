@@ -141,6 +141,6 @@ class BlogArticlesController extends AppController {
 		} else {
 			$this->Session->setFlash(__('Blog Article could not be deleted, please try again'), 'flash_failure');
 		}
-		$this->redirect($this->referrer());		
+		$this->redirect($this->referer());		
 	}
 }

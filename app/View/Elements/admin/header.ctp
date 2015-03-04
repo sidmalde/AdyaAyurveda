@@ -65,7 +65,7 @@
 					<a <?=(!empty($bodyClass) && $bodyClass == 'appointments') ? 'class="active"' : '';?>href="<?=Router::url(array('controller' => 'appointments', 'action' => 'index'));?>"><i class="fa fa-calendar fa-fw"></i> Appointments</a>
 				</li>
 				<li>
-					<a <?=(!empty($bodyClass) && $bodyClass == 'blog_articles') ? 'class="active"' : '';?>href="<?=Router::url(array('controller' => 'blog_articles', 'action' => 'index'));?>">Blog Articles</a>
+					<a <?=(!empty($bodyClass) && $bodyClass == 'blog_articles') ? 'class="active"' : '';?>href="<?=Router::url(array('controller' => 'blog_articles', 'action' => 'index'));?>"><i class="fa fa-book fa-fw"></i> Blog Articles</a>
 				</li>
 			</ul>
 		</div>
