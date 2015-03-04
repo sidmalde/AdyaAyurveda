@@ -1,34 +1,6 @@
 <?php
-/**
- * Static content controller.
- *
- * This file will render views from views/pages/
- *
- * PHP 5
- *
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @package       app.Controller
- * @since         CakePHP(tm) v 0.2.9
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */
 App::uses('AppController', 'Controller');
 
-/**
- * Static content controller
- *
- * Override this controller by placing a copy in controllers directory of an application
- *
- * @package       app.Controller
- * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
- */
 class PagesController extends AppController {
 
 	public function beforeFilter() {
@@ -115,6 +87,8 @@ class PagesController extends AppController {
 				'label',
 				'title',
 				'url',
+				'publish',
+				'modified',
 			),
 			'conditions' => array(
 				'Page.parent_page_id' => null,
@@ -122,8 +96,17 @@ class PagesController extends AppController {
 		);
 		$pages = $this->Page->find('all', $options);
 		
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-plus-square large"></i>',
+			'url' => array('controller' => 'pages', 'action' => 'add'),
+			'options' => array(
+				'class' => 'btn btn-success',
+				'escape' => false,
+			),
+		);
+
 		$title_for_layout = __('Content Pages');
-		$this->set(compact(array('title_for_layout', 'pages')));
+		$this->set(compact(array('headerButtons', 'title_for_layout', 'pages')));
 	}
 	
 	function admin_add() {
@@ -141,10 +124,19 @@ class PagesController extends AppController {
 		} elseif (!empty($this->request->data['Page']['parent_page_id'])) {
 			$parentPageId = $this->request->data['Page']['parent_page_id'];
 		}
-		
+
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-reply"></i> ' . __('Back'),
+			'url' => array('controller' => 'pages', 'action' => 'index'),
+			'options' => array(
+				'class' => 'btn btn-danger',
+				'escape' => false,
+			),
+		);
+
+
 		$title_for_layout = __('Content Pages :: New Page');
-		
-		$this->set(compact(array('title_for_layout', 'parentPageId')));
+		$this->set(compact(array('headerButtons', 'title_for_layout', 'parentPageId')));
 	}
 	
 	function admin_edit() {
@@ -162,10 +154,19 @@ class PagesController extends AppController {
 			}
 		}
 		
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-reply"></i> ' . __('Back'),
+			'url' => array('controller' => 'pages', 'action' => 'index'),
+			'options' => array(
+				'class' => 'btn btn-danger',
+				'escape' => false,
+			),
+		);
+
 		$this->Page->contain();
 		$page = $this->request->data = $this->Page->findById($this->request->params['page']);
 		$title_for_layout = __('Content Pages :: Edit Page');
-		$this->set(compact(array('title_for_layout', 'page')));
+		$this->set(compact(array('headerButtons', 'title_for_layout', 'page')));
 	}
 	
 	function admin_delete() {

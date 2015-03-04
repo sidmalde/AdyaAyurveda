@@ -26,8 +26,18 @@ class ProductsController extends AppController {
 		$this->Product->contain();
 		$products = $this->Product->find('all');
 		
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-plus-square large"></i>',
+			'url' => array('controller' => 'products', 'action' => 'add'),
+			'options' => array(
+				'class' => 'btn btn-success',
+				'escape' => false,
+			),
+		);
+
+
 		$title_for_layout = __('Products');
-		$this->set(compact(array('title_for_layout', 'products')));
+		$this->set(compact(array('headerButtons', 'title_for_layout', 'products')));
 	}
 	
 	function admin_add() {
@@ -41,8 +51,17 @@ class ProductsController extends AppController {
 			}
 		}
 		
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-reply"></i> ' . __('Back'),
+			'url' => array('controller' => 'products', 'action' => 'index'),
+			'options' => array(
+				'class' => 'btn btn-danger',
+				'escape' => false,
+			),
+		);
+
 		$title_for_layout = __('Products :: New Product');
-		$this->set(compact(array('title_for_layout')));
+		$this->set(compact(array('headerButtons', 'title_for_layout')));
 	}
 	
 	
@@ -60,9 +79,20 @@ class ProductsController extends AppController {
 				$this->Session->setFlash(__('Product could not be has been saved.'), 'flash_failure');
 			}
 		}
+
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-reply"></i> ' . __('Back'),
+			'url' => array('controller' => 'products', 'action' => 'index'),
+			'options' => array(
+				'class' => 'btn btn-danger',
+				'escape' => false,
+			),
+		);
+
+		$this->Product->contain();
 		$product = $this->Product->findById($this->request->params['product']);
 		$title_for_layout = __('Products :: Edit Product');
-		$this->set(compact(array('title_for_layout', 'product')));
+		$this->set(compact(array('headerButtons', 'title_for_layout', 'product')));
 	}
 	
 	function admin_delete() {

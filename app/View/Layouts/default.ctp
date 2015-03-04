@@ -1,65 +1,50 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<?=$this->Html->charset(); ?>
-	<title><?=$title_for_layout; ?></title>
-	<?=$this->Html->meta('icon');?>
+	<head>
+		<?=$this->Html->charset(); ?>
+		<title><?=$title_for_layout; ?></title>
+		<?=$this->Html->meta('icon');?>
 
-	<?=$this->fetch('meta');?>
-	<?=$this->fetch('css');?>
-	<?=$this->fetch('script');?>
-	
-	<?=$this->Html->script('jquery-1.10.2.min'); ?>
-	
-	<?=$this->Html->css('bootstrap-combined.no-icons.min.css'); ?> 
-	<?=$this->Html->css('font-awesome/css/font-awesome.min'); ?>
-	<?=$this->Html->css('bootstrap.min'); ?>
-	<?=$this->Html->css('cerulean_bootstrap.min'); ?>
-	<?=$this->Html->css('core'); ?>
-	
-	<?=$this->Html->script('bootstrap.min'); ?>
-	<?=$this->Html->script('core'); ?>
-</head>
-<body>
-	<div class="container">
-		<div id="content" class="row">
-			<div class="col-md-12">
-				<?=$this->element('header-default');?>
-				<?=$this->element('nav-default');?>
+		<?=$this->fetch('meta');?>
+		
+		<?=$this->Html->css('old/bootstrap-combined.no-icons.min.css'); ?>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css" media="all">
+		<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/united/bootstrap.min.css" rel="stylesheet">
+		<?=$this->Html->css('old/cerulean_bootstrap.min'); ?>
+		<?#=$this->Html->css('old/theme'); ?>
+		<?=$this->Html->css('old/core'); ?>
+		
+		
+		
+		
+	</head>
+	<body>
+		<div class="container">
+			<div id="content" class="row">
+				<div class="col-md-12">
+					<?=$this->element('header-default');?>
+					<?=$this->element('nav-default');?>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-9">
-				<?=$this->Session->flash(); ?>
+			<div class="row">
+				<div class="col-md-9">
+					<?=$this->Session->flash(); ?>
 
-				<?=$this->fetch('content'); ?>
+					<?=$this->fetch('content'); ?>
+				</div>
+				<?=$this->element('front-right-column');?>
 			</div>
-			<div class="col-md-3">
-				<p>
-					“The herbs and techniques of Ayurveda may seem quite 
-					simple on the surface. However, the way they put the 
-					body into balance has far reaching effects on the way 
-					you feel. You can change the quality of your life if 
-					you follow a few simple methods of living, eating and 
-					taking herbal food supplements.” -Dr Naram
-				</p>
-				<img src="/img/pics/ayurveda-basil.jpg" />
-				<h3><?=__('Contact Us');?></h3>
-				<p><a href="callto:02032877299" traget="_blank"><i class="fa fa-phone fa-xs"></i> 020 3287 7299</a></p>
-				<p><a href="mailto:info@adya-ayurveda.com" traget="_blank"><i class="fa fa-envelope fa-xs"></i> info@adya-ayurveda.com</a></p>
-				<hr />
-				<p class="text-center">
-					<a href="https://www.facebook.com/adyaayurveda" target="_blank"><i class="fa fa-facebook-square fa-md"></i></a>
-					<a href="#" target="_blank"><i class="fa fa-twitter-square fa-md"></i></a>
-					<a href="https://uk.linkedin.com/pub/sarita-nahar/a/a46/a1a" target="_blank"><i class="fa fa-linkedin-square fa-md"></i></a>
-				</p>
+			<div id="footer" class="row">
+				<div class="col-md-12">
+				</div>
 			</div>
+			<div class="clear">&nbsp;</div>
 		</div>
-		<div id="footer" class="row">
-			<div class="col-md-12">
-			</div>
-		</div>
-		<div class="clear">&nbsp;</div>
-	</div>
-</body>
+		<?=$this->element('flash_container');?>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="//code.jquery.com/ui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
+		<?=$this->Html->script('bootstrap.min'); ?>
+		<?=$this->Html->script('core'); ?>
+	</body>
 </html>

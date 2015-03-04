@@ -1,4 +1,4 @@
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
 			<a href="/" class="navbar-brand hidden-lg hidden-md"><i class="fa fa-home fa-3"></i>&nbsp;</a>
@@ -40,13 +40,14 @@
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><?=__('Knowledge Base');?> <span class="caret"></span></a>
 					<ul class="dropdown-menu" aria-labelledby="User Management">
-						<li><?=$this->Html->link(__('Articles'), array('controller' => 'knowledge_base_articles', 'action' => 'index'));?></li>
-						<li><?=$this->Html->link(__('Modalities'), array('controller' => 'modalities', 'action' => 'index'));?></li>
 						<li><?=$this->Html->link(__('Diseases'), array('controller' => 'diseases', 'action' => 'index'));?></li>
+						<li><?=$this->Html->link(__('Modalities'), array('controller' => 'modalities', 'action' => 'index'));?></li>
+						<li><?=$this->Html->link(__('Articles'), array('controller' => 'knowledge_base_articles', 'action' => 'index'));?></li>
 					</ul>
 				</li>
 				<li><?=$this->Html->link(__('Products'), array('controller' => 'products', 'action' => 'index'));?></li>
 				<li><?=$this->Html->link(__('Orders'), array('controller' => 'orders', 'action' => 'index'));?></li>
+				<li><?=$this->Html->link(__('Forums'), array('controller' => 'forums', 'action' => 'index'));?></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="/logout"><?=__('Logout');?></a></li>

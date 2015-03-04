@@ -20,8 +20,8 @@ class GroupsController extends AppController {
 			),
 		));
 		$groups = $this->Group->find('all');
-		$pageTitle = __('Groups');
-		$this->set(compact(array('pageTitle', 'groups')));
+		$title_for_layout = __('Groups');
+		$this->set(compact(array('title_for_layout', 'groups')));
 	}
 	
 	public function admin_view() {
@@ -31,29 +31,38 @@ class GroupsController extends AppController {
 			));
 			$options = array(
 				'conditions' => array(
-					'Group.id' => $this->params['group'],
+					'Group.name' => $this->params['group'],
 				),
 			);
 			$group = $this->Group->find('first', $options);
+			
 			$this->set('bodyClass', strtolower($group['Group']['name']).'s');
 			if (!empty($group)) {
-				$options = array(
-					'conditions' => array(
-						'User.group_id' => $group['Group']['id'],
-					),
-				);
-				$users = $this->Group->User->find('all', $options);
+				$users['User'] = $group['User'];
 			} else {
 				$this->Session->setFlash('Inavlid Group');
 				$this->redirect('index');
 			}
-			$pageTitle = $group['Group']['name'].'s';
-			$this->set(compact(array('pageTitle', 'group', 'users')));
+
+			
+			$title_for_layout = $group['Group']['name'];
+			$this->set(compact(array('title_for_layout', 'group', 'users')));
 		} else {
 			$users = $this->User->find('all');
-			$pageTitle = __('Users');
-			$this->set(compact(array('pageTitle', 'users')));
+			$title_for_layout = __('Users');
+			$this->set(compact(array('title_for_layout', 'users')));
 		}
+
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-plus-square large"></i>',
+			'url' => array('controller' => 'users', 'action' => 'add'),
+			'options' => array(
+				'class' => 'btn btn-success',
+				'escape' => false,
+			),
+		);
+
+		$this->set(compact(array('headerButtons')));
 	}
 	
 	public function admin_add() {
@@ -66,8 +75,8 @@ class GroupsController extends AppController {
 				$this->Session->setFlash(__('The group could not be saved. Please, try again.'), 'flash_failure');
 			}
 		}
-		$pageTitle = __('System Maintenance &#187; Groups &#187; New');
-		$this->set(compact(array('pageTitle')));
+		$title_for_layout = __('System Maintenance &#187; Groups &#187; New');
+		$this->set(compact(array('title_for_layout')));
 	}
 	
 	public function admin_edit($id = null) {
@@ -88,8 +97,8 @@ class GroupsController extends AppController {
 			$this->Session->setFlash(__('Invalid Group Id'), 'flash_failure');
 			$this->redirect($this->referer());
 		}
-		$pageTitle = sprintf(__('Groups &#187; Edit &#187; %s'), $group['Group']['name']);
-		$this->set(compact(array('group', 'pageTitle')));
+		$title_for_layout = sprintf(__('Groups &#187; Edit &#187; %s'), $group['Group']['name']);
+		$this->set(compact(array('group', 'title_for_layout')));
 		
 		if (!empty($this->request->data)) {
 			if ($this->Group->save($this->request->data)) {

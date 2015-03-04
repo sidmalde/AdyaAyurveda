@@ -1,7 +1,7 @@
 <h2>
 	<?=$title_for_layout;?>
 	<div class="btn-group pull-right">
-		<?=$this->Html->link(__('Back'), array('action' => 'index'), array('class' => 'btn btn-danger btn-sm'));?>
+		<?=$this->Html->link(__('Back'), array('action' => 'index'), array('class' => 'btn btn-danger btn-xs'));?>
 	</div>
 </h2>
 <div class="well">

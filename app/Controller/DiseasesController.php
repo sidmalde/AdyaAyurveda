@@ -17,9 +17,18 @@ class DiseasesController extends AppController {
 			),
 		);
 		$diseases = $this->Disease->find('all', $options);
-		$title_for_layout = __('Diseases');
 		
-		$this->set(compact(array('diseases', 'title_for_layout')));
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-plus-square large"></i>',
+			'url' => array('controller' => 'diseases', 'action' => 'add'),
+			'options' => array(
+				'class' => 'btn btn-success',
+				'escape' => false,
+			),
+		);
+
+		$title_for_layout = __('Diseases');
+		$this->set(compact(array('headerButtons', 'diseases', 'title_for_layout')));
 	}
 	
 	function admin_view() {
@@ -33,8 +42,17 @@ class DiseasesController extends AppController {
 		));
 		$disease = $this->Disease->findById($this->request->params['disease']);
 		
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-reply"></i> ' . __('Back'),
+			'url' => array('controller' => 'diseases', 'action' => 'index'),
+			'options' => array(
+				'class' => 'btn btn-danger',
+				'escape' => false,
+			),
+		);
+
 		$title_for_layout = __('Disease :: Edit %s', $disease['Disease']['disease']);
-		$this->set(compact(array('title_for_layout', 'disease')));
+		$this->set(compact(array('headerButtons', 'title_for_layout', 'disease')));
 	}
 	
 	function admin_add() {
@@ -48,8 +66,17 @@ class DiseasesController extends AppController {
 			}
 		}
 		
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-reply"></i> ' . __('Back'),
+			'url' => array('controller' => 'diseases', 'action' => 'index'),
+			'options' => array(
+				'class' => 'btn btn-danger',
+				'escape' => false,
+			),
+		);
+
 		$title_for_layout = __('Disease :: New Disease');
-		$this->set(compact(array('title_for_layout')));
+		$this->set(compact(array('headerButtons', 'title_for_layout')));
 	}
 	
 	function admin_edit() {
@@ -70,8 +97,18 @@ class DiseasesController extends AppController {
 		$this->Disease->contain();
 		$disease = $this->Disease->findById($this->request->params['disease']);
 		
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-reply"></i> ' . __('Back'),
+			'url' => array('controller' => 'diseases', 'action' => 'index'),
+			'options' => array(
+				'class' => 'btn btn-danger',
+				'escape' => false,
+			),
+		);
+
+
 		$title_for_layout = __('Disease :: Edit %s', $disease['Disease']['disease']);
-		$this->set(compact(array('title_for_layout', 'disease')));
+		$this->set(compact(array('headerButtons', 'title_for_layout', 'disease')));
 	}
 	
 	function admin_delete() {

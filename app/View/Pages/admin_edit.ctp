@@ -1,9 +1,3 @@
-<h2>
-	<?=$title_for_layout;?>
-	<div class="btn-group pull-right">
-		<?=$this->Html->link(__('Back'), array('action' => 'index'), array('class' => 'btn btn-danger btn-sm'));?>
-	</div>
-</h2>
 <div class="well">
 	<?=$this->Form->create('Page');?>
 		<?
@@ -23,7 +17,7 @@
 		<?=$this->Form->input('seo_priority', array('selected' => $page['Page']['seo_priority'], 'options' => array('0.80' => 'High', '0.64' => 'Medium', '0.51' => 'Low')));?>
 		<?=$this->Form->input('meta_keywords');?>
 		<?=$this->Form->input('meta_description');?>
-		<?/* =$this->Form->input('url'); */?>
+		<?=$this->Form->input('publish');?>
 		<?=$this->Form->button(__('Save'), array('type' => 'submit', 'class' => 'btn btn-success'));?>
 	<?=$this->Form->end();?>
 </div>

@@ -14,7 +14,17 @@ class ModalitiesController extends AppController {
 		$modalities = $this->Modality->find('all');
 		$title_for_layout = __('Modalities');
 		
-		$this->set(compact(array('modalities', 'title_for_layout')));
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-plus-square large"></i>',
+			'url' => array('controller' => 'modalities', 'action' => 'add'),
+			'options' => array(
+				'class' => 'btn btn-success',
+				'escape' => false,
+			),
+		);
+
+
+		$this->set(compact(array('headerButtons', 'modalities', 'title_for_layout')));
 	}
 	
 	function admin_add() {
@@ -28,8 +38,17 @@ class ModalitiesController extends AppController {
 			}
 		}
 		
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-reply"></i> ' . __('Back'),
+			'url' => array('controller' => 'modalities', 'action' => 'index'),
+			'options' => array(
+				'class' => 'btn btn-danger',
+				'escape' => false,
+			),
+		);
+
 		$title_for_layout = __('Modality :: New Modality');
-		$this->set(compact(array('title_for_layout')));
+		$this->set(compact(array('headerButtons', 'title_for_layout')));
 	}
 	
 	function admin_edit() {
@@ -46,12 +65,21 @@ class ModalitiesController extends AppController {
 				$this->Session->setFlash(__('Modality could not be saved, please try again.'), 'flash_failure');
 			}
 		}
+
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-reply"></i> ' . __('Back'),
+			'url' => array('controller' => 'modalities', 'action' => 'index'),
+			'options' => array(
+				'class' => 'btn btn-danger',
+				'escape' => false,
+			),
+		);
 		
 		$this->Modality->contain();
 		$modality = $this->Modality->findById($this->request->params['modality']);
 		
 		$title_for_layout = __('Modality :: Edit %s', $modality['Modality']['modality']);
-		$this->set(compact(array('title_for_layout', 'modality')));
+		$this->set(compact(array('headerButtons', 'title_for_layout', 'modality')));
 	}
 	
 	function admin_delete() {

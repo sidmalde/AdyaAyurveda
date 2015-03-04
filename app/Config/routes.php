@@ -4,6 +4,11 @@
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
 	Router::connect('/venues', array('controller' => 'pages', 'action' => 'venues'));
+	Router::connect('/rebuild/permissions', array('controller' => 'acl', 'action' => 'aco_aro_sync'));
+	Router::connect('/system-management/dashboard', array('controller' => 'pages', 'action' => 'dashboard', 'admin' => true));
+	Router::connect('/test-1', array('controller' => 'tests', 'action' => 'index'));
+	Router::connect('/cfeed', array('controller' => 'appointments', 'action' => 'calendar_feed', 'admin' => true));
+	Router::connect('/cfeed/:start/:end', array('controller' => 'appointments', 'action' => 'calendar_feed', 'admin' => true));
 	
 	// Groups
 	Router::connect('/system-management/groups', array('controller' => 'groups', 'action' => 'index', 'admin' => true));
@@ -20,8 +25,14 @@
 	Router::connect('/system-management/users/:user/delete', array('controller' => 'users', 'action' => 'delete', 'admin' => true));
 	Router::connect('/system-management/users/:userAttachment/delete-attachment', array('controller' => 'users', 'action' => 'delete_attachment', 'admin' => true));
 	Router::connect('/system-management/users/:userNote/delete-note', array('controller' => 'users', 'action' => 'delete_user_note', 'admin' => true));
-
-	// pages
+	
+	// User Data Fields
+	Router::connect('/system-management/user-data-fields', array('controller' => 'users', 'action' => 'data_field_index', 'admin' => true));
+	Router::connect('/system-management/user-data-fields/new', array('controller' => 'users', 'action' => 'data_field_add', 'admin' => true));
+	Router::connect('/system-management/user-data-fields/:userDataField/edit', array('controller' => 'users', 'action' => 'data_field_edit', 'admin' => true));
+	Router::connect('/system-management/user-data-fields/:userDataField/delete', array('controller' => 'users', 'action' => 'data_field_delete', 'admin' => true));
+	
+	// Pages
 	Router::connect('/content-management/pages', array('controller' => 'pages', 'action' => 'index', 'admin' => true));
 	Router::connect('/content-management/pages/new', array('controller' => 'pages', 'action' => 'add', 'admin' => true));
 	Router::connect('/content-management/pages/:page/new', array('controller' => 'pages', 'action' => 'add', 'admin' => true));
@@ -64,12 +75,30 @@
 	Router::connect('/system-management/orders/:order/edit', array('controller' => 'orders', 'action' => 'edit', 'admin' => true));
 	Router::connect('/system-management/orders/:order/delete', array('controller' => 'orders', 'action' => 'delete', 'admin' => true));
 	
-	// User Data Fields
-	Router::connect('/system-management/user-data-fields', array('controller' => 'users', 'action' => 'data_field_index', 'admin' => true));
-	Router::connect('/system-management/user-data-fields/new', array('controller' => 'users', 'action' => 'data_field_add', 'admin' => true));
-	Router::connect('/system-management/user-data-fields/:userDataField/edit', array('controller' => 'users', 'action' => 'data_field_edit', 'admin' => true));
-	Router::connect('/system-management/user-data-fields/:userDataField/delete', array('controller' => 'users', 'action' => 'data_field_delete', 'admin' => true));
+	// Appointments
+	Router::connect('/system-management/appointments', array('controller' => 'appointments', 'action' => 'index', 'admin' => true));
+	Router::connect('/system-management/appointments/new', array('controller' => 'appointments', 'action' => 'add', 'admin' => true));
+	Router::connect('/system-management/appointments/:booking/edit', array('controller' => 'appointments', 'action' => 'edit', 'admin' => true));
+	Router::connect('/system-management/appointments/:appointmentId/delete', array('controller' => 'appointments', 'action' => 'delete', 'admin' => true));
+	Router::connect('/system-management/appointments/quick-view/:appointmentId', array('controller' => 'appointments', 'action' => 'quick_view', 'admin' => true));
+	Router::connect('/system-management/appointments/send-reminder/:type/:appointmentId', array('controller' => 'appointments', 'action' => 'send_reminder', 'admin' => true));
 	
+	// Forums
+	Router::connect('/forum', array('controller' => 'forums', 'action' => 'index'));
+	Router::connect('/forum/:forumCategory/:forumTopic', array('controller' => 'forums', 'action' => 'view'));
+	Router::connect('/forum/:forumCategory/:forumTopic/new', array('controller' => 'forums', 'action' => 'add_post'));
+	Router::connect('/forum/:forumCategory/:forumTopic/:forumPost', array('controller' => 'forums', 'action' => 'view_post'));
+	Router::connect('/forum/:forumCategory/:forumTopic/:forumPost/reply', array('controller' => 'forums', 'action' => 'add_post'));
+	// Router::connect('/forum/:forumCategory/:forumTopic/*', array('controller' => 'forums', 'action' => 'topic_view'));
+	Router::connect('/content-management/forums', array('controller' => 'forums', 'action' => 'index', 'admin' => true));
+	Router::connect('/content-management/forums/new', array('controller' => 'forums', 'action' => 'category_add', 'admin' => true));
+	Router::connect('/content-management/forums/:forumCategory', array('controller' => 'forums', 'action' => 'category_view', 'admin' => true));
+	Router::connect('/content-management/forums/:forumCategory/edit', array('controller' => 'forums', 'action' => 'category_edit', 'admin' => true));
+	Router::connect('/content-management/forums/:forumCategory/delete', array('controller' => 'forums', 'action' => 'category_delete', 'admin' => true));
+	Router::connect('/content-management/forum-topics/new', array('controller' => 'forums', 'action' => 'topic_add', 'admin' => true));
+	Router::connect('/content-management/forum-topics/:forumTopic', array('controller' => 'forums', 'action' => 'topic_view', 'admin' => true));
+	Router::connect('/content-management/forum-topics/:forumTopic/edit', array('controller' => 'forums', 'action' => 'topic_edit', 'admin' => true));
+	Router::connect('/content-management/forum-topics/:forumTopic/delete', array('controller' => 'forums', 'action' => 'topic_delete', 'admin' => true));
 	
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 	Router::connect('/*', array('controller' => 'pages', 'action' => 'view'));

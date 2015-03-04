@@ -31,6 +31,7 @@ class AclController extends AppController {
 	}
 	
 	function aco_aro_sync() {
+		ini_set('max_execution_time', 300);
 		$this->layout = false;
 		$this->_clean = true;
 		$this->startup();
@@ -174,24 +175,12 @@ class AclController extends AppController {
 		$group = $this->User->Group;
 		
 		// System Administrators
-		$group->id = '51488314-33c4-4394-8d02-0f0c46dad844';
+		$group->id = '52346d30-68f8-4e91-b19b-1368d96041f1';
 		$this->Acl->allow($group, 'controllers');
-
-		// Drivers
-		$group->id = '51ae09c7-2024-4597-8c0d-2ac058d0f9c0';
-		$this->Acl->deny($group, 'controllers');
 		
-		// Agents
-		$group->id = '5148e57b-aadc-4040-8633-0f0c46dad844';
-		$this->Acl->deny($group, 'controllers');
-		
-		// Clients - Individual
-		$group->id = '5148e587-2720-4203-a3d0-0f0c46dad844';
-		$this->Acl->deny($group, 'controllers');
-		
-		// Clients - Corporate
-		$group->id = '517f8d80-e470-459b-bd1b-0dc446dad844';
-		$this->Acl->deny($group, 'controllers');
+		// System Administrators
+		$group->id = '5234723b-bdbc-4e50-930c-1368d96041f1';
+		$this->Acl->allow($group, 'controllers');
 		
 		
 		//we add an exit to avoid an ugly "missing views" error message

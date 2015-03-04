@@ -1,9 +1,3 @@
-<h2>
-	<?=$title_for_layout;?>
-	<div class="btn-group pull-right">
-		<?=$this->Html->link(__('New Modality'), array('action' => 'add'), array('class' => 'btn btn-success btn-xs'));?>
-	</div>
-</h2>
 <div class="well">
 	<?=$this->Form->create('Modality');?>
 		<?=$this->Form->hidden('id', array('value' => $modality['Modality']['id']));?>

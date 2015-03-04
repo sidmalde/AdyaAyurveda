@@ -72,6 +72,157 @@ $(document).ready(function(){
 		});
 		$('.viewMap:first').click();
 	}
+	
+	$('.datetimepicker').datetimepicker({
+		format: 'DD-MM-YYYY H:mm',
+	});
+	
+	if ($("#bookingsCalendar").length > 0) {
+		$('#bookingsCalendar').fullCalendar({
+			header: {
+				left: 'title',
+				center: '',
+				right: 'today, prev,next, agendaDay,agendaWeek,month'
+			},
+			/* height: 600, */
+			defaultView: 'month',
+			editable: true,
+			timeFormat: 'H(:mm)',
+			agenda: 'H:mm{ - H:mm}', // 5:00 - 6:30 // for agendaWeek and agendaDay
+			'': 'H(:mm)t',            // for all other views
+			/* month: 'MMMM yyyy',                             // September 2009 */
+			titleFormat: {
+				month: 'MMM YYYY',
+				week: "D MMM YY", // Sep 7 - 13 2009
+				day: 'D MMM, YYYY',
+			},
+			columnFormat : {
+				month: 	"ddd",
+				week: 	"ddd D MMM", // Sep 7 - 13 2009
+				day:	"ddd D MMM",
+			},
+			eventSources: 'http://dev.adya-ayurveda.com/cfeed',
+			events: function(start, end, callback) {
+				start = moment(start).format('YYYY-MM-DD HH:mm:ss');
+				end = moment(end).format('YYYY-MM-DD HH:mm:ss');
+				
+				$data = '';
+				$.ajax({
+					url: '/cfeed', // use the `url` property
+					type: 'POST',
+					data: {
+						'start': start,
+						'end': end,
+					},
+					dataType: 'json',
+					success: function($data) {
+						console.log($data);
+						for(var propt in $data){
+							$event = $data[propt];
+							$event['start'] = moment($event['start']).format();
+							$event['end'] = moment($event['end']).format();
+							$('#bookingsCalendar').fullCalendar( 'renderEvent', $event);
+						}
+					},
+					error: function(a, b, c) {
+						console.log(a);
+						console.log(b);
+						console.log(c);
+						
+					},
+					textColor: '#CCC' // a non-ajax option
+				});
+			},
+			/* dayClick: function(date, allDay, jsEvent, view) {
+
+				if (allDay) {
+					alert('Clicked on the entire day: ' + date);
+				}else{
+					alert('Clicked on the slot: ' + date);
+				}
+
+			},
+			eventResize: function(event,dayDelta,minuteDelta,revertFunc) {
+				if (!confirm("The end date of " + event.title + "has been moved " + dayDelta + " days and " + minuteDelta + " minutes. Is this okay?")) {
+					revertFunc();
+				} else {
+					event.newEnd 	= $.fullCalendar.formatDate($.fullCalendar.parseDate( event.end ), 'yyyy-MM-dd HH:mm:ss');
+					event.minuteChange = minuteDelta;
+					event.dayChange = dayDelta;
+					event.minuteChange = minuteDelta;
+					$.ajax({
+						url: '/update-event', // use the `url` property
+						type: 'POST',
+						data: event,
+						// dataType: 'json',
+						success: function($data) {
+							
+						},
+						error: function(a, b, c) {
+							console.log(a);
+							console.log(b);
+							console.log(c);
+							
+						},
+						color: 'blue',   // a non-ajax option
+						textColor: '#CCC' // a non-ajax option
+					});
+				}
+			},
+			eventDrop: function(event,dayDelta) {
+				console.log(event);
+				console.log(dayDelta);
+
+				var $minutes = (dayDelta._milliseconds / 1000) / 60;
+				var $hours = $minutes / 60;
+				var $days = dayDelta._days;
+				
+				console.log($minutes);
+				console.log($hours);
+				console.log($days);
+
+				return;
+				if (!confirm(event.title + " was moved " + dayDelta + " days and " + minuteDelta + " minutes. Is this okay?")) {
+					revertFunc();
+				} else {
+					
+					event.changeInHours = $hours;
+					event.dayChange = dayDelta;
+					event.minuteChange = minuteDelta;
+					$.ajax({
+						url: '/system-management/appointments/'+event.id+'/edit', // use the `url` property
+						// url: 'http://londonvipgroup.dev.gurusols.com/update-event', // use the `url` property
+						type: 'POST',
+						data: event,
+						// dataType: 'json',
+						success: function($data) {
+							console.log($data);
+						},
+						error: function(a, b, c) {
+							console.log(a);
+							console.log(b);
+							console.log(c);
+						},
+						// color: 'blue',   // a non-ajax option
+						// textColor: '#CCC' // a non-ajax option
+					});
+				}
+			}, */
+			eventClick: function(calEvent, jsEvent, view) {
+				$('#viewAppointmentModal').removeData("modal");
+				$.ajax({
+					url: '/system-management/appointments/quick-view/'+calEvent.id,
+					success: function (data) {
+						$("#viewAppointmentModal").html(data);
+					}
+				});
+
+				$("#viewAppointmentModal").modal({
+					show: true
+				});
+			}
+	    });
+	}
 });
 
 function animBottomMargin(){

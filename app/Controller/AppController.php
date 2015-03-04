@@ -112,9 +112,11 @@ class AppController extends Controller {
 			'conditions' => array(
 				'Page.parent_page_id' => null,
 				'Page.url !=' => '/',
+				'Page.publish' => true,
 			),
 		);
 		$pagesInNav = $this->Page->find('all', $options);
+		// debug($pagesInNav); die;
 		$this->set(compact(array('pagesInNav')));
 	}
 	

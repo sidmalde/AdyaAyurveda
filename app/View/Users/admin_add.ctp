@@ -1,10 +1,3 @@
-<h3>
-	<?=@$pageTitle;?>
-	<div class="btn-group pull-right">
-		<?=$this->Html->link(__('Back'), array('controller' => 'users', 'action' => 'index'), array('class' => 'btn btn-success btn-xs'));?>
-	</div>
-</h3>
-
 <div class="well">
 	<?=$this->Form->create('User', array('url' => array('controller' => 'users', 'action' => 'add')));?>
 		<div class="col-md-6">

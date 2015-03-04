@@ -1,4 +1,18 @@
 /*@charset "UTF-8";*/
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+
 .clr, .clear{clear:both;}
 .hide{display:none !important;}
 .left{float: left;}
@@ -95,6 +109,18 @@ div.required.errorField label{ color: #900 !important; }
 div.required label:after{ content: ' *' }
 hr {font-size: 1.7em; font-weight: 800; border-bottom: 2px solid rgba(0, 133, 0, 0.4);}
 .top-spacer {margin-top: 20px;}
+
+/*
+	Bootstrap Overrides
+*/
+.nav-sidebar>li>a:hover, .nav-sidebar>li>a:focus { color: #FFF; background-color: #222; }
+.nav-sidebar > .active > a, .nav-sidebar > .active > a:hover, .nav-sidebar > .active > a:focus { color: #FFF; background-color: #222; }
+.navbar-default { background-color: #111; border-color: #111; }
+.sidebar { position: fixed; top: 63px; bottom: 0; left: 0; z-index: 1000; display: block; padding: 20px; overflow-x: hidden; overflow-y: auto; background-color: #111; border-right: 1px solid #eee; }
+.nav { padding-left: 0; margin-bottom: 0; list-style: none; }
+.nav-sidebar { margin-right: -20px; margin-bottom: 20px; margin-left: -20px; font-size: 1.2em;}
+
+
 body.admin-layout {
   padding-top: 60px;
 }
@@ -123,11 +149,16 @@ h3 {
 	border-bottom: 1px solid rgba(0, 133, 0, 0.4);
 }
 
+.navbar .nav>li>a {
+	font-size: 18px;
+	font-weight: 800;
+}
+
 .well {
 	background-color: #E8FFE2;
 }
 
-.navbar-collapse.collapse.navbar-responsive-collapse {
+.navbar-collapse.collapse.navbar-responsive-collapse, .navbar-collapse.collapse.navbar-inverse-collapse {
 	padding-left: 0px;
 	padding-right: 0px;
 }

@@ -1,9 +1,3 @@
-<h2>
-	<?=$title_for_layout;?>
-	<div class="btn-group pull-right">
-		<?=$this->Html->link(__('Back'), array('action' => 'index'), array('class' => 'btn btn-danger btn-sm'));?>
-	</div>
-</h2>
 <div class="well">
 	<table class="table table-condensed table-striped table-bordered table-hover datatable">
 		<tr>

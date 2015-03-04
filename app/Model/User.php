@@ -20,7 +20,9 @@ class User extends AppModel {
 			'className' => 'Order',
 			'foreignKey' => 'patient_id',
 		),
+		'Appointment'
 	);
+	
 	var $belongsTo = array(
 		'Group' => array(
 			'className' => 'Group',
@@ -72,7 +74,6 @@ class User extends AppModel {
 			return true;
 		}
 	}
-	
 	var $validate = array(
 		'group_id' => array(
 			'rule' => 'notEmpty',
@@ -120,6 +121,15 @@ class User extends AppModel {
 		$options = array(
 			'conditions' => array(
 				'User.group_id' => '5234723b-bdbc-4e50-930c-1368d96041f1',
+			),
+			'fields' => array(
+				'id',
+				'title',
+				'firstname',
+				'lastname',
+			),
+			'order' => array(
+				'firstname' => 'ASC'
 			),
 		);
 		$patients = $this->find('all', $options);

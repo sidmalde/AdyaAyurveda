@@ -1,9 +1,3 @@
-<h2>
-	<?=$title_for_layout;?>
-	<div class="btn-group pull-right">
-		<?=$this->Html->link(__('New KB Article'), array('action' => 'add'), array('class' => 'btn btn-success btn-xs'));?>
-	</div>
-</h2>
 <div class="">
 	<? if(!empty($kbArticles)): ?>
 		

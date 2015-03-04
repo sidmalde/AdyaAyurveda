@@ -1,11 +1,3 @@
-<h3>
-	<?=@$pageTitle;?>
-	<div class="btn-group pull-right">
-		<?=$this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add'), array('class' => 'btn btn-success btn-xs'));?>
-		<?=$this->Html->link(__('New Group'), array('controller' => 'groups', 'action' => 'add'), array('class' => 'btn btn-success btn-xs'));?>
-	</div>
-</h3>
-
 <div class="row">
 	<div class="col-md-12">
 		<ul class="nav nav-tabs" id="myTab">
@@ -55,9 +47,8 @@
 													<? if (empty($user['active'])): ?>
 														<li><?=$this->Html->link(__('Activate'), array('controller' => 'users', 'action' => 'activate', 'user' => $user['id']), array('escape' => false));?></li>
 													<? endif; ?>
-													<li><?=$this->Html->link('<i class="icon-cog"></i> '.__('Edit'), array('controller' => 'users', 'action' => 'edit', 'user' => $user['id']), array('escape' => false));?></li>
+													<li><?=$this->Html->link('<i class="icon-eye-open"></i> '.__('View / Edit'), array('controller' => 'users', 'action' => 'view', 'user' => $user['id']), array('escape' => false));?></li>
 													<li><?=$this->Html->link('<i class="icon-remove"></i> '.__('Delete'), array('controller' => 'users', 'action' => 'delete', 'user' => $user['id']), array('escape' => false));?></li>
-													<li><?=$this->Html->link('<i class="icon-eye-open"></i> '.__('View'), array('controller' => 'users', 'action' => 'view', 'user' => $user['id']), array('escape' => false));?></li>
 												</ul>
 											</div>
 										</td>

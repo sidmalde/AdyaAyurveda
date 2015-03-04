@@ -22,7 +22,17 @@ class UsersController extends AppController {
 		$groups = $this->User->Group->find('all');
 		
 		$pageTitle = __('Users');
-		$this->set(compact(array('pageTitle', 'groups')));
+		
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-plus-square large"></i>',
+			'url' => array('controller' => 'users', 'action' => 'add'),
+			'options' => array(
+				'class' => 'btn btn-success',
+				'escape' => false,
+			),
+		);
+		
+		$this->set(compact(array('pageTitle', 'groups', 'headerButtons')));
 	}
 	
 	public function admin_view() {
@@ -80,9 +90,17 @@ class UsersController extends AppController {
 				$userDataFields[$index]['UserDataField']['options'] = $temparray;
 			}
 		}
-		// debug($userDataFields);
-		// die;
-		$this->set(compact(array('countries', 'users', 'user', 'groups', 'pageTitle', 'userDataFields')));
+		
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-reply large"></i>',
+			'url' => $this->referer(),
+			'options' => array(
+				'class' => 'btn btn-danger',
+				'escape' => false,
+			),
+		);
+		
+		$this->set(compact(array('countries', 'users', 'user', 'groups', 'pageTitle', 'userDataFields', 'headerButtons')));
 	}
 
 	public function admin_add() {
@@ -94,7 +112,7 @@ class UsersController extends AppController {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('The user has been saved'), 'flash_success');
-				$this->redirect(array('action' => 'index'));
+				$this->redirect(array('action' => 'view', 'user' =>$this->User->id));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'), 'flash_failure');
 			}
@@ -106,7 +124,17 @@ class UsersController extends AppController {
 		$this->set('userMaritalStatuses', $this->userMaritalStatuses);
 		$this->set('userTitles', $this->userTitles);
 		$this->set('patientTypes', $this->patientTypes);
-		$this->set(compact(array('groups', 'pageTitle')));
+		
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-reply large"></i>',
+			'url' => $this->referer(),
+			'options' => array(
+				'class' => 'btn btn-danger',
+				'escape' => false,
+			),
+		);
+		
+		$this->set(compact(array('groups', 'pageTitle', 'headerButtons')));
 	}
 
 	public function admin_edit($id = null) {
@@ -336,7 +364,7 @@ class UsersController extends AppController {
 			$this->User->UserDataValue->UserDataField->create();
 			if ($this->User->UserDataValue->UserDataField->save($this->request->data)) {
 				$this->Session->setFlash(__('Data field saved Successfully'), 'flash_success');
-				$this->redirect($this->referer());
+				$this->redirect(array('action' => 'data_field_index'));
 			} else {
 				$this->Session->setFlash(__('Data field could not be saved, please try again'), 'flash_failure');
 			}
@@ -400,10 +428,10 @@ class UsersController extends AppController {
 	}
 	
 	public function login() {
-		$this->layout = 'login';
+		$this->layout = 'default';
 		if ($this->Auth->user()) {
 			if ($this->Auth->user('group_id') == '52346d30-68f8-4e91-b19b-1368d96041f1') {
-				$this->redirect('/system-management/users');
+				$this->redirect('/system-management/groups/patients');
 			} else {
 				$this->redirect('/myportal');
 			}
@@ -411,7 +439,7 @@ class UsersController extends AppController {
 			if ($this->request->is('post')) {
 				if ($this->Auth->login()) {
 					if ($this->Auth->user('group_id') == '52346d30-68f8-4e91-b19b-1368d96041f1') {
-						$this->redirect('/system-management/users');
+						$this->redirect('/system-management/groups/patients');
 					} else {
 						$this->redirect('/myportal');
 					}

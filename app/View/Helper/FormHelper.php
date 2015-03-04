@@ -359,11 +359,11 @@ class FormHelper extends AppHelper {
 			// this is when I want bootstrap styling
 			$options['inputDefaults'] = array(
 				'before' => null,
-				'between' => '<div class="controls">',
-				'after' => '</div>',
+				'between' => '',
+				'after' => '',
 				'format' => null,
-				'class' => 'input-block-level',
-				'div' => array('class' => 'control-group'),
+				'class' => 'form-control',
+				'div' => array('class' => 'form-group'),
 				'label' => array('class' => 'control-label')
 			);
 		}
@@ -1029,6 +1029,79 @@ class FormHelper extends AppHelper {
 		// 	}
 		// }
 
+		if($options['type'] === 'checkbox') {
+			$firstPartLabel = '';
+			$secondPartLabel = '';
+			$endAfter = '';
+			// debug($options); die;
+			if(!empty($label)) {
+				$label = (strpos($label, 'control-label')) ? preg_replace('/(<[^<\/][\w\s=" ]+)(class=")(control-label)( ?")(>.+)/i', '$1$5', $label) : $label;
+				if(strpos($label, 'class')) {
+					$label = preg_replace('/(<[^<\/]+)(class=")(.+)(")(.+)/i', '$1$2checkbox $3$4$5', $label);
+				} else {
+					$label = preg_replace('/(<[^<\/]+)(>)(.+)/i', '$1 class="checkbox"$2$3', $label);
+				}
+				$firstPartLabel = preg_replace('/(<[^\/]+?>)(.+)/i', '$1', $label);
+				$secondPartLabel = preg_replace('/(<[^\/]+?>)(.+)/i', '$2', $label);			
+			} else {
+				$firstPartLabel = $options['before'];
+				$secondPartLabel = $options['after'];
+			}
+			
+			if(!empty($options['class'])){
+				unset($options['class']);
+			}
+
+			$options['label'] =false;
+			if(empty($options['format'])) {
+				$options['format'] = array('between','before', 'input', 'after');
+			}	
+			if($options['between'] != false) {
+				$endAfter = '</div>';
+			}
+
+			$options['before'] = $firstPartLabel;
+			$options['after'] = $secondPartLabel.$endAfter;
+			
+			
+		}
+
+		if($options['type'] === 'radio') {
+			$labelClass = (!empty($options['label_class'])) ? $options['label_class'] : '';
+			$betweenClass = (!empty($options['between_class'])) ? $options['between_class'] : '';
+			$beforePart = '<label class = "radio '.$labelClass.'">';
+			$afterPart = '</label>';
+			
+			$betweenPart = '';
+			$endAfter = '';
+			if(!empty($options['class'])){
+				unset($options['class']);
+			}
+			if(!empty($options['between']) && $options['between'] != false) {
+				$options['between'] = (strpos( $options['between'], 'class')) ? preg_replace('/(<[^<\/][\w\s=]+")([\w\s\d ]+)?(".+)/i', '$1$2 '.$betweenClass.'$3', $options['between']) : preg_replace('/(<[^<\/].[\w]+)(>)/i', '$1 class="'.$betweenClass.'"$2', $options['between']);
+				$endAfter = '</div>';
+			}
+			$separatorPart = '</label><label class="radio '.$labelClass.'">';
+						
+			if(empty($options['format'])) {
+				$options['format'] = array('between', 'before', 'label', 'input', 'after');
+			}
+			if($options['between'] != false) {
+				$endAfter = '</div>';
+			}
+			$options['label'] = true;
+			if(!empty($label)) {
+				$options['before'] = preg_replace('/(<[^\/]+?>)(.+)/i', '$1', $label);
+				$options['after'] = preg_replace('/(<[^\/]+?>)(.+)/i', '$2', $label).$endAfter;			
+			} else {
+				$options['before'] = (!empty($options['before'])) ? $options['before'] : $beforePart;
+				$options['separator'] = (!empty($options['separator'])) ? $options['separator'] : $separatorPart;
+				$options['after'] = '</label>'.$endAfter;
+			}
+			$options['legend'] = false;
+			$options['label'] = false;
+		}
+
 		$type = $options['type'];
 		$out = array('before' => $options['before'], 'label' => $label, 'between' => $options['between'], 'after' => $options['after']);
 		$format = $this->_getFormat($options);
@@ -1046,10 +1119,10 @@ class FormHelper extends AppHelper {
 			}
 		}
 
-		if ($type === 'radio' && isset($out['between'])) {
+		/*if ($type === 'radio' && isset($out['between'])) {
 			$options['between'] = $out['between'];
 			$out['between'] = null;
-		}
+		}*/
 		$out['input'] = $this->_getInput(compact('type', 'fieldName', 'options', 'radioOptions', 'selected', 'dateFormat', 'timeFormat'));
 
 		$output = '';

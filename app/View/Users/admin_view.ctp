@@ -1,12 +1,4 @@
 <?=$this->Form->create('User', array('url' => $this->Html->url(array('controller' => 'users', 'action' => 'edit', 'user' => $user['User']['id'])), 'class' => 'form form-user-note-edit', 'type' => 'file')); ?>
-	<h2>
-		<?=$pageTitle;?>
-		<div class="btn-group pull-right">
-			<?=$this->Html->link(__('Back'), array('action' => 'index'), array('class' => 'btn btn-xs btn-danger'));?>
-			<?=$this->Form->submit(__('Save Changes'), array('div' => false, 'label' => false, 'type' => 'submit', 'class' => 'btn btn-xs btn-success'));?>
-		</div>
-	</h2>
-
 	<div class="outer-5">
 		<div class="col-md-12">
 			<div class="tabbable">
@@ -100,7 +92,7 @@
 														<div class="panel-body">
 															<p class="alert alert-info">
 																<strong><?=__('Created By: ', true);?></strong><?=@$users[$userNote['creator_id']];?><br />
-																<strong><?=__('Created On: ', true);?></strong><?=$this->Time->nice($userNote['created']);?><strong><?=__(' @: ', true);?></strong><?=$this->Time->niceTime($userNote['created']);?><br />
+																<strong><?=__('Created On: ', true);?></strong><?=$this->Time->nice($userNote['created']);?><br />
 															</p>
 															<p class="alert alert-success"><?=nl2br(Sanitize::html($userNote['description']));?></p>
 															<div class="btn-group">

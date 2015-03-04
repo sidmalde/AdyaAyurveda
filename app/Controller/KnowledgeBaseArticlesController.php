@@ -21,8 +21,17 @@ class KnowledgeBaseArticlesController extends AppController {
 		));
 		$kbArticles = $this->KnowledgeBaseArticle->Modality->find('all');
 		
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-plus-square large"></i>',
+			'url' => array('controller' => 'knowledge_base_articles', 'action' => 'add'),
+			'options' => array(
+				'class' => 'btn btn-success',
+				'escape' => false,
+			),
+		);
+
 		$title_for_layout = __('Knowledge Base Articles');
-		$this->set(compact(array('title_for_layout', 'kbArticles')));
+		$this->set(compact(array('headerButtons', 'title_for_layout', 'kbArticles')));
 	}
 	
 	function admin_add() {
@@ -36,8 +45,17 @@ class KnowledgeBaseArticlesController extends AppController {
 			}
 		}
 		
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-reply"></i> ' . __('Back'),
+			'url' => array('controller' => 'knowledge_base_articles', 'action' => 'index'),
+			'options' => array(
+				'class' => 'btn btn-danger',
+				'escape' => false,
+			),
+		);
+
 		$title_for_layout = __('Knowledge Base Articles :: New Article');
-		$this->set(compact(array('title_for_layout')));
+		$this->set(compact(array('headerButtons', 'title_for_layout')));
 	}
 	
 	function admin_view() {
@@ -46,9 +64,18 @@ class KnowledgeBaseArticlesController extends AppController {
 			$this->redirect('index');
 		}
 		
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-reply"></i> ' . __('Back'),
+			'url' => array('controller' => 'knowledge_base_articles', 'action' => 'index'),
+			'options' => array(
+				'class' => 'btn btn-danger',
+				'escape' => false,
+			),
+		);
+		
 		$kbArticle = $this->KnowledgeBaseArticle->findById($this->request->params['kbArticle']);
 		$title_for_layout = __('Knowledge Base Articles :: %s', $kbArticle['KnowledgeBaseArticle']['title']);
-		$this->set(compact(array('title_for_layout', 'kbArticle')));
+		$this->set(compact(array('headerButtons', 'title_for_layout', 'kbArticle')));
 	}
 	
 	function admin_edit() {
@@ -65,9 +92,19 @@ class KnowledgeBaseArticlesController extends AppController {
 				$this->Session->setFlash(__('KB Article could not be saved.'), 'flash_failure');
 			}
 		}
+		
+		$headerButtons[] = array(
+			'title' => '<i class="fa fa-reply"></i> ' . __('Back'),
+			'url' => array('controller' => 'knowledge_base_articles', 'action' => 'index'),
+			'options' => array(
+				'class' => 'btn btn-danger',
+				'escape' => false,
+			),
+		);
+
 		$kbArticle = $this->KnowledgeBaseArticle->findById($this->request->params['kbArticle']);
 		$title_for_layout = __('Knowledge Base Articles :: Edit Article');
-		$this->set(compact(array('title_for_layout', 'kbArticle')));
+		$this->set(compact(array('headerButtons', 'title_for_layout', 'kbArticle')));
 	}
 	
 	function admin_delete() {

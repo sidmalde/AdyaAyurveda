@@ -1,12 +1,8 @@
-<h2>
-	<?=$title_for_layout;?>
-	<div class="btn-group pull-right">
-		<?=$this->Html->link(__('New Disease'), array('action' => 'add'), array('class' => 'btn btn-success btn-xs'));?>
-	</div>
-</h2>
 <div class="well">
-	<h1><?=$disease['Disease']['disease'];?></h1>
+	<h3><?=$disease['Disease']['disease'];?></h3>
+	<br />
 	<p class="alert alert-info"><?=$disease['Disease']['description'];?></p>
+	<br />
 	<ul class="nav nav-tabs" id="myTab">
 		<?php foreach ($disease['KnowledgeBaseArticle'] as $index => $knowledgeBaseArticle): ?>
 			<? $activeLinkClass=($index == 0) ? 'class="active"': '';?>

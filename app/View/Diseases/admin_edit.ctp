@@ -1,9 +1,3 @@
-<h2>
-	<?=$title_for_layout;?>
-	<div class="btn-group pull-right">
-		<?=$this->Html->link(__('Back'), array('action' => 'index'), array('class' => 'btn btn-danger btn-sm'));?>
-	</div>
-</h2>
 <div class="well">
 	<?=$this->Form->create('Disease');?>
 		<?=$this->Form->hidden('id', array('value' => $disease['Disease']['id']));?>
