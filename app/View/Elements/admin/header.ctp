@@ -59,10 +59,13 @@
 					</ul>
 				</li>
 				<li>
-					<a href="<?=Router::url(array('controller' => 'orders', 'action' => 'index'));?>"><i class="fa fa-user fa-fw"></i> Orders</a>
+					<a <?=(!empty($bodyClass) && $bodyClass == 'orders') ? 'class="active"' : '';?>href="<?=Router::url(array('controller' => 'orders', 'action' => 'index'));?>"><i class="fa fa-user fa-fw"></i> Orders</a>
 				</li>
 				<li>
-					<a href="<?=Router::url(array('controller' => 'appointments', 'action' => 'index'));?>"><i class="fa fa-calendar fa-fw"></i> Appointments</a>
+					<a <?=(!empty($bodyClass) && $bodyClass == 'appointments') ? 'class="active"' : '';?>href="<?=Router::url(array('controller' => 'appointments', 'action' => 'index'));?>"><i class="fa fa-calendar fa-fw"></i> Appointments</a>
+				</li>
+				<li>
+					<a <?=(!empty($bodyClass) && $bodyClass == 'blog_articles') ? 'class="active"' : '';?>href="<?=Router::url(array('controller' => 'blog_articles', 'action' => 'index'));?>">Blog Articles</a>
 				</li>
 			</ul>
 		</div>

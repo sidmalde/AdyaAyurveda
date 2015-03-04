@@ -116,6 +116,31 @@ class User extends AppModel {
 		return true;
     }
 	
+	public function getAdminList() {
+		$this->contain();
+		$options = array(
+			'conditions' => array(
+				'User.group_id' => '52346d30-68f8-4e91-b19b-1368d96041f1',
+			),
+			'fields' => array(
+				'id',
+				'title',
+				'firstname',
+				'lastname',
+			),
+			'order' => array(
+				'firstname' => 'ASC'
+			),
+		);
+		$users = $this->find('all', $options);
+		
+		$formattedUsers = array();
+		foreach ($users as $user) {
+			$formattedUsers[$user['User']['id']] = $user['User']['title'].' '.$user['User']['firstname'].' '.$user['User']['lastname'];
+		}
+		return $formattedUsers;
+	}
+
 	public function getPatientList() {
 		$this->contain();
 		$options = array(

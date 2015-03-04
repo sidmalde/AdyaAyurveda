@@ -47,6 +47,14 @@
 	Router::connect('/content-management/knowlege-base/:kbArticle/edit', array('controller' => 'knowledge_base_articles', 'action' => 'edit', 'admin' => true));
 	Router::connect('/content-management/knowlege-base/:kbArticle/delete', array('controller' => 'knowledge_base_articles', 'action' => 'delete', 'admin' => true));
 	
+	// Blog Articles
+	Router::connect('/blog', array('controller' => 'blog_articles', 'action' => 'index'));
+	Router::connect('/blog/:ref/:title', array('controller' => 'blog_articles', 'action' => 'view'));
+	Router::connect('/content-management/blog-articles', array('controller' => 'blog_articles', 'action' => 'index', 'admin' => true));
+	Router::connect('/content-management/blog-articles/new', array('controller' => 'blog_articles', 'action' => 'add', 'admin' => true));
+	Router::connect('/content-management/blog-articles/:blogArticle/edit', array('controller' => 'blog_articles', 'action' => 'edit', 'admin' => true));
+	Router::connect('/content-management/blog-articles/:blogArticle/delete', array('controller' => 'blog_articles', 'action' => 'delete', 'admin' => true));
+	
 	// Modalities
 	Router::connect('/content-management/modalities', array('controller' => 'modalities', 'action' => 'index', 'admin' => true));
 	Router::connect('/content-management/modalities/new', array('controller' => 'modalities', 'action' => 'add', 'admin' => true));

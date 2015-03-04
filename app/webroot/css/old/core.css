@@ -315,3 +315,23 @@ table .header:hover {
 #map-canvas {
 	height: 300px;
 }
+
+.blog-article-container {
+	margin: 10px 0px;
+	border: 1px solid rgba(0, 133, 0, 0.4);
+	border-radius: 3px;
+	padding: 8px;
+}
+
+.blog-article-container > .blog-article-title {
+	font-size: 16px;
+	font-weight: 800;
+}
+
+.blog-article-container > .blog-article-content {
+	margin: 5px 0px;
+}
+
+.blog-article-container > .blog-article-extra > .blog-article-more {
+	margin: 10px 0px;
+}
