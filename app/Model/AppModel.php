@@ -32,4 +32,11 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+
+	function currency($number, $currency = null, $options = array()) {
+		// App::uses('BakewellNumber', 'Utility');
+		// return BakewellNumber::currency($number, $currency, $options);
+		App::uses('CakeNumber', 'Utility');
+		return CakeNumber::currency($number, $currency, $options);
+	}
 }

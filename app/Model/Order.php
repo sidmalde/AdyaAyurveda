@@ -46,7 +46,7 @@ class Order extends AppModel {
 
 		$returnArray = array();
 		foreach($orders as $order) {
-			$returnArray[$order['Order']['id']] = __('#%s for patient %s total of %d without VAT', $order['ref'], $order['User']['title'] . ' ' . $order['User']['firstname'] . ' ' . $order['User']['lastname'], $order['total']);
+			$returnArray[$order['Order']['id']] = __('#%s for patient %s total of %s without VAT', $order['Order']['ref'], $order['User']['title'] . ' ' . $order['User']['firstname'] . ' ' . $order['User']['lastname'], $this->currency($order['Order']['total'], 'GBP'));
 		}
 		return $returnArray;
 	}

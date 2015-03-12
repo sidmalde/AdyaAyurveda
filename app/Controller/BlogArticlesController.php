@@ -47,15 +47,7 @@ class BlogArticlesController extends AppController {
 	}
 
 	function admin_index() {
-		$options = array(
-			'conditions' => array(
-				'BlogArticle.publish' => true,
-			),
-			'order' => array(
-				'BlogArticle.created' => 'DESC',
-			),
-		);
-		$blogArticles = $this->BlogArticle->find('all', $options);
+		$blogArticles = $this->BlogArticle->find('all');
 
 		$headerButtons[] = array(
 			'title' => '<i class="fa fa-plus-square large"></i>',
@@ -73,6 +65,7 @@ class BlogArticlesController extends AppController {
 	function admin_add() {
 		if (!empty($this->request->data)) {
 			if ($this->BlogArticle->save($this->request->data)) {
+				$this->request->data['BlogArticle']['ref'] = $this->BlogArticle->getBlogArticleRef();
 				$this->Session->setFlash(__('New Blog Article has been created'), 'flash_success');
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -103,7 +96,9 @@ class BlogArticlesController extends AppController {
 		}
 
 		if (!empty($this->request->data)) {
-			$this->request->data = $this->BlogArticle->getBlogArticleRef();
+			if (empty($this->request->data['BlogArticle']['ref'])) {
+				$this->request->data['BlogArticle']['ref'] = $this->BlogArticle->getBlogArticleRef();
+			}
 			if ($this->BlogArticle->save($this->request->data)) {
 				$this->Session->setFlash(__('New Blog Article has been created'), 'flash_success');
 				$this->redirect(array('action' => 'index'));

@@ -49,7 +49,7 @@ class OrdersController extends AppController {
 			
 			if (!empty($orderItems)) {
 				$order = array(
-					'user_id' =>  $this->Auth->user('id'),
+					'user_id' =>  $this->request->data['Order']['patient_id'],
 					'patient_id' =>  $this->request->data['Order']['patient_id'],
 					'ref' => $this->Order->getOrderRef(),
 					'total' => $runningTotal,

@@ -3,6 +3,7 @@
 		<table class="table table-condensed table-striped table-bordered table-hover">
 			<thead>
 				<tr>
+					<th><?=__('ref');?></th>
 					<th><?=__('Title');?></th>
 					<th><?=__('Created By');?></th>
 					<th><?=__('Published');?></th>
@@ -13,6 +14,7 @@
 			<tbody>
 				<? foreach($blogArticles as $blogArticle): ?>
 					<tr>
+						<td><?=$blogArticle['BlogArticle']['ref'];?></td>
 						<td><?=$blogArticle['BlogArticle']['title'];?></td>
 						<td><?=$blogArticle['User']['firstname'] . ' ' . $blogArticle['User']['lastname'];?></td>
 						<td><?=$blogArticle['BlogArticle']['publish'];?></td>

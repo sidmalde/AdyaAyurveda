@@ -78,6 +78,9 @@ class AppController extends Controller {
 		'png' => 'png',
 		'tiff' => 'tiff',
 	);
+
+	public $vatRate = 0.2;
+	public $vatMultiplier = 1.20;
 	
 	function beforeFilter() {
 		//Configure SecurityComponent

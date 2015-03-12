@@ -1,6 +1,7 @@
 <div class="well">
 	<?=$this->Form->create('BlogArticle');?>
 		<?=$this->Form->hidden('id');?>
+		<?=$this->Form->hidden('ref');?>
 		<?=$this->Form->input('user_id');?>
 		<?=$this->Form->input('title');?>
 		<?=$this->Form->input('summary');?>

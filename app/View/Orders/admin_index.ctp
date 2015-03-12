@@ -24,7 +24,6 @@
 						<div class="btn-group">
 							<button class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown"><?=__('Actions')?> <span class="caret"></span></button>
 							<ul class="dropdown-menu">
-								<li><?=$this->Html->link('<i class="fa fa-book"></i> '.__('Invoice'), array('controller' => 'orders', 'action' => 'create_invoice', 'order' => $order['Order']['id']), array('escape' => false));?></li>
 								<li><?=$this->Html->link('<i class="fa fa-cog"></i> '.__('Edit'), array('controller' => 'orders', 'action' => 'edit', 'order' => $order['Order']['id']), array('escape' => false));?></li>
 								<li><?=$this->Html->link('<i class="fa fa-trash"></i> '.__('Delete'), array('controller' => 'orders', 'action' => 'delete', 'order' => $order['Order']['id']), array('escape' => false), __('Are you sure?'));?></li>
 							</ul>
