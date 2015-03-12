@@ -179,4 +179,21 @@ class OrdersController extends AppController {
 		}
 		$this->redirect($this->referer());
 	}
+
+	function admin_create_invoice() {
+		$this->layout = false;
+		$this->autoRender = false;
+
+		if (empty($this->request->params['order'])) {
+			$this->redirect($this->referer());
+		}
+		
+		$this->Order->contain(array(
+			'OrderItem' => 'Product',
+			'User'
+		));
+		$order = $this->Order->findById($this->request->params['order']);
+
+		$this->Pdf->generateInvoice($order);
+	}
 }

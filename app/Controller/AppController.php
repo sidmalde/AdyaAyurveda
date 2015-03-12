@@ -29,6 +29,7 @@ class AppController extends Controller {
 		),
 		'Session',
 		'Email',
+		'Pdf',
 		/* 'DebugKit.Toolbar', */
 	);
 	public $helpers = array('Html', 'Form', 'Session', 'Number', 'Time', 'Text');

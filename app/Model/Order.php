@@ -31,4 +31,23 @@ class Order extends AppModel {
 		}
 		return $orderRef+1;
 	}
+
+	
+	function getUnInvoicedOrders(){
+		$this->contain(array(
+			'User',
+		));
+		$options = array(
+			'conditions' => array(
+				'Order.invoice_id' => null,
+			)
+		);
+		$orders = $this->find('all', $options);
+
+		$returnArray = array();
+		foreach($orders as $order) {
+			$returnArray[$order['Order']['id']] = __('#%s for patient %s total of %d without VAT', $order['ref'], $order['User']['title'] . ' ' . $order['User']['firstname'] . ' ' . $order['User']['lastname'], $order['total']);
+		}
+		return $returnArray;
+	}
 }

@@ -82,6 +82,14 @@
 	Router::connect('/system-management/orders/:order', array('controller' => 'orders', 'action' => 'view', 'admin' => true));
 	Router::connect('/system-management/orders/:order/edit', array('controller' => 'orders', 'action' => 'edit', 'admin' => true));
 	Router::connect('/system-management/orders/:order/delete', array('controller' => 'orders', 'action' => 'delete', 'admin' => true));
+	Router::connect('/system-management/orders/:order/create-invoice', array('controller' => 'orders', 'action' => 'create_invoice', 'admin' => true));
+	
+	// Invoices
+	Router::connect('/system-management/invoices', array('controller' => 'invoices', 'action' => 'index', 'admin' => true));
+	Router::connect('/system-management/invoices/new', array('controller' => 'invoices', 'action' => 'add', 'admin' => true));
+	Router::connect('/system-management/invoices/:invoice', array('controller' => 'invoices', 'action' => 'view', 'admin' => true));
+	Router::connect('/system-management/invoices/:invoice/edit', array('controller' => 'invoices', 'action' => 'edit', 'admin' => true));
+	Router::connect('/system-management/invoices/:invoice/delete', array('controller' => 'invoices', 'action' => 'delete', 'admin' => true));
 	
 	// Appointments
 	Router::connect('/system-management/appointments', array('controller' => 'appointments', 'action' => 'index', 'admin' => true));
