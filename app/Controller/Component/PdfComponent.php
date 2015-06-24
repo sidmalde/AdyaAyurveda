@@ -310,6 +310,6 @@ class PdfComponent extends Component{
 		$this->printOrders($invoice);
 		$this->printTableSummary($invoice);
 
-		$this->PDF->Output(TMP.$invoice['Invoice']['id'].'.pdf', 'I');
+		$this->PDF->Output(TMP.$invoice['Invoice']['id'].'.pdf', 'D');
 	}
 }

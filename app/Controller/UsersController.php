@@ -99,8 +99,8 @@ class UsersController extends AppController {
 				'escape' => false,
 			),
 		);
-		
-		$this->set(compact(array('countries', 'users', 'user', 'groups', 'pageTitle', 'userDataFields', 'headerButtons')));
+		$userGenders = $this->userGenders;
+		$this->set(compact(array('countries', 'users', 'user', 'groups', 'pageTitle', 'userDataFields', 'headerButtons', 'userGenders')));
 	}
 
 	public function admin_add() {
@@ -332,6 +332,7 @@ class UsersController extends AppController {
 		
 		$pageTitle = __('System Maintenance &#187; Data Fields');
 		$this->set(compact(array('pageTitle', 'userDataFields')));
+		$this->set('bodyClass', 'user_data_fields');
 	}
 	
 	public function admin_data_field_add() {
@@ -352,6 +353,7 @@ class UsersController extends AppController {
 		$this->set('userGenders', $userGenders);
 		$this->set('userFieldTypes', $this->userFieldTypes);
 		$this->set(compact(array('pageTitle')));
+		$this->set('bodyClass', 'user_data_fields');
 	}
 	
 	public function admin_data_field_edit() {
@@ -378,6 +380,7 @@ class UsersController extends AppController {
 		$this->set('userGenders', $userGenders);
 		$this->set('userFieldTypes', $this->userFieldTypes);
 		$this->set(compact(array('pageTitle', 'userDataField')));
+		$this->set('bodyClass', 'user_data_fields');
 	}
 	
 	public function admin_data_field_delete() {
@@ -391,6 +394,7 @@ class UsersController extends AppController {
 			}
 		}
 		$this->redirect($this->referer());
+		$this->set('bodyClass', 'user_data_fields');
 	}
 	
 	public function admin_delete_attachment() {

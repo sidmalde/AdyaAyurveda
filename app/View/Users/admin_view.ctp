@@ -23,13 +23,14 @@
 									<?=$this->Form->input('title', array('empty' => __('Please select a country'), 'options' => $userTitles));?>
 									<?=$this->Form->input('firstname');?>
 									<?=$this->Form->input('lastname');?>
-									<?/* =$this->Form->input('gender'); */?>
-									<div class="input-group datepicker">
+									<?=$this->Form->input('gender', array('empty' => __('Please select a gender'), 'options' => $userGenders));?>
+									<?=$this->Form->input('date_of_birth', array('type' => 'text', 'class' => 'form-control date datepicker', 'value' => (!empty($user['User']['date_of_birth'])) ? date('d M Y', strtotime($user['User']['date_of_birth'])) : ''));?>
+									<?/*<div class="input-group datepicker">
 										<label for="date_of_birth">Date of Birth</label>
 										<div class="controls">
-											<input name="data[User][date_of_birth]" type="text" class="form-control datepicker" id="datepicker" value="<?=$this->Time->nice($user['User']['date_of_birth']);?>">
+											<input name="data[User][date_of_birth]" type="text" class="form-control datetimepicker" id="datepicker" value="<?=(!empty($user['User']['date_of_birth'])) ? date('d M Y', strtotime($user['User']['date_of_birth'])) : '' ;?>">
 										</div>
-									</div>
+									</div>*/?>
 									<?=$this->Form->input('phone');?>
 								</div>
 								<div class="col-md-5">
@@ -43,6 +44,7 @@
 									<?=$this->Form->input('mobile');?>
 								</div>
 							</div>
+								<?=$this->Form->button(__('Save', true), array('class' => 'btn btn-info'))?>
 						</div>
 					</div>
 					<div class="tab-pane fade" id="extraInformation">

@@ -32,15 +32,12 @@
 	<div class="navbar-default sidebar" role="navigation">
 		<div class="sidebar-nav navbar-collapse">
 			<ul class="nav" id="side-menu">
-				<?/*<li>
-					<a href="<?=Router::url(array('controller' => 'pages', 'action' => 'dashboard'));?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-				</li>*/?>
 				<li>
 					<a <?=(!empty($bodyClass) && $bodyClass == 'users') ? 'class="active"' : '';?>href="<?=Router::url(array('controller' => 'groups', 'action' => 'view', 'group' => 'patients'));?>"><i class="fa fa-user fa-fw"></i> <?=__('Patients');?></a>
 				</li>
 				<li>
 					<a href="#"><i class="fa fa-table fa-fw"></i> CMS<span class="fa arrow"></span></a>
-					<ul class="nav nav-second-level <?=(!empty($bodyClass) && ($bodyClass == 'pages' || $bodyClass == 'knowledge_base_articles' || $bodyClass == 'modalities' || $bodyClass == 'diseases' || $bodyClass == 'products')) ? 'in' : '';?>">
+					<ul class="nav nav-second-level <?=(!empty($bodyClass) && ($bodyClass == 'pages' || $bodyClass == 'knowledge_base_articles' || $bodyClass == 'modalities' || $bodyClass == 'diseases' || $bodyClass == 'products' || $bodyClass == 'blog_articles' || $bodyClass == 'user_data_fields')) ? 'in' : '';?>">
 						<li>
 							<a <?=(!empty($bodyClass) && $bodyClass == 'pages') ? 'class="active"' : '';?>href="<?=Router::url(array('controller' => 'pages', 'action' => 'index'));?>">Pages</a>
 						</li>
@@ -56,6 +53,12 @@
 						<li>
 							<a <?=(!empty($bodyClass) && $bodyClass == 'products') ? 'class="active"' : '';?>href="<?=Router::url(array('controller' => 'products', 'action' => 'index'));?>">Products</a>
 						</li>
+						<li>
+							<a <?=(!empty($bodyClass) && $bodyClass == 'blog_articles') ? 'class="active"' : '';?>href="<?=Router::url(array('controller' => 'blog_articles', 'action' => 'index'));?>"><i class="fa fa-book fa-fw"></i> Blog Articles</a>
+						</li>
+						<li>
+							<a <?=(!empty($bodyClass) && $bodyClass == 'user_data_fields') ? 'class="active"' : '';?>href="<?=Router::url(array('controller' => 'users', 'action' => 'data_field_index'));?>"><i class="fa fa-dashboard fa-fw"></i> User Data Fields</a>
+						</li>
 					</ul>
 				</li>
 				<li>
@@ -66,9 +69,6 @@
 				</li>
 				<li>
 					<a <?=(!empty($bodyClass) && $bodyClass == 'appointments') ? 'class="active"' : '';?>href="<?=Router::url(array('controller' => 'appointments', 'action' => 'index'));?>"><i class="fa fa-calendar fa-fw"></i> Appointments</a>
-				</li>
-				<li>
-					<a <?=(!empty($bodyClass) && $bodyClass == 'blog_articles') ? 'class="active"' : '';?>href="<?=Router::url(array('controller' => 'blog_articles', 'action' => 'index'));?>"><i class="fa fa-book fa-fw"></i> Blog Articles</a>
 				</li>
 			</ul>
 		</div>

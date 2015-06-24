@@ -1,7 +1,7 @@
 $(document).ready(function(){
-	if ($( "#datepicker" ).length > 0) {
+	/*if ($( "#datepicker" ).length > 0) {
 		$( "#datepicker" ).datepicker();
-	}
+	}*/
 	
 	$('input.input-file-real').change(function() {
 		$fakeInput = $(this).data('fake-input');
@@ -75,6 +75,10 @@ $(document).ready(function(){
 	
 	$('.datetimepicker').datetimepicker({
 		format: 'DD-MM-YYYY H:mm',
+	});
+	
+	$('.datepicker').datetimepicker({
+		format: 'DD MM YYYY',
 	});
 	
 	if ($("#bookingsCalendar").length > 0) {

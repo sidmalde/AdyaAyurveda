@@ -3,7 +3,6 @@
 		<table class="table table-condensed table-striped table-bordered table-hover">
 			<tr>
 				<th><?=__('Ref');?></th>
-				<th><?=__('Created By');?></th>
 				<th><?=__('Patient');?></th>
 				<th><?=__('Items');?></th>
 				<th><?=__('Total');?></th>
@@ -14,7 +13,6 @@
 			<? foreach($orders as $order): ?>
 				<tr>
 					<td><?=$order['Order']['ref'];?></td>
-					<td><?=$order['User']['firstname'].' '.$order['User']['lastname'];?></td>
 					<td><?=$order['Patient']['firstname'].' '.$order['Patient']['lastname'];?></td>
 					<td><?=count($order['OrderItem']);?></td>
 					<td><?=$this->Number->currency($order['Order']['total'], 'GBP');?></td>
